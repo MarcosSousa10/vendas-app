@@ -1,4 +1,5 @@
 import Layout from "../../layout";
+import { Input } from "../../common/input";
 import { useState } from "react";
 
 export const CadastroProdutos:React.FC = ()=>{
@@ -19,27 +20,29 @@ export const CadastroProdutos:React.FC = ()=>{
     return(
         <Layout titulo="Cadastros de Produtos" >
             <div className="columns"> 
-            <div className="field is-half column">
-                <label className="label" htmlFor="inputSKU">SKU *</label>
-                <div className="control">
-                    <input value={sku}  onChange={event => setSku(event.target.value)} className="input" placeholder="Digite o SKU do produto" type="text" id="inputSKU" />
-                </div>
-            </div>
-
-            <div className="field is-half column">
-                <label className="label" htmlFor="inputPreco">Preço *</label>
-                <div className="control">
-                    <input value={preco} onChange={event => setPreco(event.target.value)} className="input" placeholder="Digite o Preço do produto" type="text" name="" id="inputPreco" />
-                </div>
-            </div>
+            <Input label="SKU: *"
+                columnClasses="is-half"
+                onChange={setSku}
+                value={sku}
+                id="inputSKU"
+                placeholder="Digite o SKU do produto"
+            />
+            <Input label="Preço: *"
+                columnClasses="is-half"
+                onChange={setPreco}
+                value={preco}
+                id="inputPreco"
+                placeholder="Digite o Preço do produto"
+            />
             </div>
             <div className="columns">
-            <div className="field column is-full">
-                <label className="label" htmlFor="inputNome">Nome *</label>
-                <div className="control">
-                    <input value={nome} onChange={event => setNome(event.target.value)} className="input" placeholder="Digite o Nome do produto" type="text" name="" id="inputNome" />
-                </div>
-            </div>
+            <Input label="Nome: *"
+                columnClasses="is-full"
+                onChange={setNome}
+                value={nome}
+                id="inputNome"
+                placeholder="Digite o Nome do produto"
+            />
             </div>
             <div className="columns">
             <div className="field column is-full">
