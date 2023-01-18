@@ -29,6 +29,15 @@ export const CadastroProdutos:React.FC = ()=>{
                     <textarea  className="textarea" placeholder="Digite o SKU do produto" id="inputDesc" />
                 </div>
             </div>
+
+            <div className="field is-grouped">
+                <div className="control is-link">
+                    <button className="button">Salvar</button>
+                </div>
+                <div className="control is-link">
+                    <button className="button">Voltar</button>
+                </div>
+            </div>
         </Layout>
     )
 }
