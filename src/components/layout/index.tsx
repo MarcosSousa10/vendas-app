@@ -1,5 +1,10 @@
+import { ReactNode } from 'react';
 import {Menu} from './menu/index';
-const Layout: React.FC=()=>{
+interface LayoutProps{
+    titulo?: string;
+    children?: ReactNode;
+}
+const Layout: React.FC<LayoutProps>=(props)=>{
 return(
     <div className="app">
         <section className="main-content columns is-fullheight">
@@ -9,12 +14,12 @@ return(
                     <div className="card">
                         <div className="card-header">
                             <p className="card-header-title">
-                                Cadastro
+                                {props.titulo}
                             </p>
                         </div>
                         <div className="card-content">
                             <div className="content">
-                                Conteudo
+                                {props.children}
                             </div>
                         </div>
                     </div>
