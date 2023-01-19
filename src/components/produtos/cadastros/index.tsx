@@ -16,13 +16,11 @@ export const CadastroProdutos:React.FC = ()=>{
             descricao:descricao,
             nome:nome,
             preco: parseFloat(preco),
-            sku:sku ,
-           
-            
+            sku:sku ,            
             
         }
         console.log(produto);
-       service.salvar(produto).then(produtoResposta=> console.log(produtoResposta)).catch(erro=>console.log(erro))
+       service.salvar(produto)//.then(produtoResposta=> console.log(produtoResposta))
     }
     return(
         <Layout titulo="Cadastros de Produtos" >
