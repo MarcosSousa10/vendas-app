@@ -6,24 +6,45 @@ import { Produto } from "../../../app/models/produtos";
 
 export const CadastroProdutos:React.FC = ()=>{
     const service = useProdutoService();
-    const [sku, setSku]= useState('');
-    const [preco, setPreco]= useState('');
-    const [nome, setNome]= useState('');
-    const [descricao, setDescricao]= useState('');
+    const [sku, setSku]= useState<string>('');
+    const [preco, setPreco]= useState<string>('');
+    const [nome, setNome]= useState<string>('');
+    const [descricao, setDescricao]= useState<string>('');
+    const [id, setId]=useState<string>();
+    const [cadastro, setCadastro]=useState<string>();
 
     const submit = ()=>{
          const produto:Produto = {
-            descricao:descricao,
-            nome:nome,
+            sku:sku,
             preco: parseFloat(preco),
-            sku:sku ,            
-            
+            nome:nome,
+            descricao:descricao
         }
-        console.log(produto);
-       service.salvar(produto)//.then(produtoResposta=> console.log(produtoResposta))
+       service
+       .salvar(produto)
+       .then(produtoResposta => {
+        setId(produtoResposta.id)
+        setCadastro(produtoResposta.cadastro)
+       })
     }
     return(
         <Layout titulo="Cadastros de Produtos" >
+            {id &&
+            <div className="columns"> 
+            <Input label="Codigo: *"
+                columnClasses="is-half"                
+                value={id}
+                id="inputSKU"
+                disabled={true}
+               
+            />
+            <Input label="Data Cadastro: *"
+                columnClasses="is-half"                
+                value={cadastro}
+                id="inputPreco"
+                disabled
+            />
+            </div>}
             <div className="columns"> 
             <Input label="SKU: *"
                 columnClasses="is-half"
