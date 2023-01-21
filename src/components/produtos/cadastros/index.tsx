@@ -5,6 +5,22 @@ import { useProdutoService } from "../../../app/services/produto.service";
 import { Produto } from "../../../app/models/produtos";
 import { converterEmBigDecimal } from "../../../app/util/money";
 import { Alert } from "../../common/message";
+import * as yup from 'yup';
+const validationSchema = yup.object().shape({
+    sku: yup.string().trim().required("Campo Obrigatorio"),
+    nome: yup.string().trim().required("Campo Obrigatorio"),
+    descricao: yup.string().trim()
+    .required("Campo Obrigatorio"),
+
+    // exige 10 caracterees.length(10, "Deve subir pelo menos 10 caracteres"),
+    preco: yup.number().required("Campo Obrigatorio").moreThan(0,"Valor deve ser maior que 0,00 (Zero)")
+})
+interface FormErros{
+    sku?:string;
+    nome?:string;
+    preco?:string;
+    descricao?:string;
+}
 export const CadastroProdutos:React.FC = ()=>{
     const service = useProdutoService();
     const [sku, setSku]= useState<string>('');
@@ -14,6 +30,7 @@ export const CadastroProdutos:React.FC = ()=>{
     const [id, setId]=useState<string>();
     const [cadastro, setCadastro]=useState<string>();
     const [messages, setMessages]=useState<Array<Alert>>([])
+    const [errosr,setErrors]=useState<FormErros>({})
         const submit = ()=>{
          const produto:Produto = {
             id,
@@ -22,24 +39,38 @@ export const CadastroProdutos:React.FC = ()=>{
             nome:nome,
             descricao:descricao
         }
-        if(id){
-        service.atualizar(produto)
-        .then(Response=>setMessages([{
-            tipo:"success", texto:"Produto Atualizado com sucesso"
-        }]))
-        }else{
-          service
-       .salvar(produto)
-       .then(produtoResposta => {
-        setId(produtoResposta.id)
-        setCadastro(produtoResposta.cadastro)
-        setMessages([{
-            tipo:"success", texto:"Produto Salvo com sucesso"
-        }])
-       })  
+        validationSchema.validate(produto).then(obj=>{
+            setErrors({})
+            if(id){
+            service.atualizar(produto)
+            .then(Response=>setMessages([{
+                tipo:"success", texto:"Produto Atualizado com sucesso"
+            }]))
+            }else{
+              service
+           .salvar(produto)
+           .then(produtoResposta => {
+            setId(produtoResposta.id)
+            setCadastro(produtoResposta.cadastro)
+            setMessages([{
+                tipo:"success", texto:"Produto Salvo com sucesso"
+            }])
+           })  
+            }
+           
+        }).catch(err=>{
+            const fild = err.path;
+            const message= err.message;
+            setErrors({
+                [fild]:message
+            })
+            setMessages([
+                {tipo:"danger", fild, texto:message}
+            ])
+        })
         }
-       
-    }
+
+
     return(
         <Layout titulo="Cadastros de Produtos" mensagem={messages}>
             
@@ -66,6 +97,7 @@ export const CadastroProdutos:React.FC = ()=>{
                 value={sku}
                 id="inputSKU"
                 placeholder="Digite o SKU do produto"
+                error={errosr.sku}
             />
             <Input label="Preço: *"
                 columnClasses="is-half"
@@ -75,6 +107,7 @@ export const CadastroProdutos:React.FC = ()=>{
                 placeholder="Digite o Preço do produto"
                 currency
                 maxLength={10}
+                error={errosr.preco}
             />
             </div>
             <div className="columns">
@@ -84,13 +117,15 @@ export const CadastroProdutos:React.FC = ()=>{
                 value={nome}
                 id="inputNome"
                 placeholder="Digite o Nome do produto"
+                error={errosr.nome}
             />
             </div>
             <div className="columns">
             <div className="field column is-full">
                 <label className="label" htmlFor="inputDesc">Descrição *</label>
                 <div className="control">
-                    <textarea value={descricao} onChange={event => setDescricao(event.target.value)} className="textarea" placeholder="Digite o SKU do produto" id="inputDesc" />
+                    <textarea  value={descricao} onChange={event => setDescricao(event.target.value)} className="textarea" placeholder="Digite o SKU do produto" id="inputDesc" />
+                {errosr.descricao&&<p className="help is-danger">{errosr.descricao}</p>}
                 </div>
             </div>
             </div>

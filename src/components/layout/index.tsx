@@ -25,7 +25,7 @@ return(
                             <div className="content">
                                 {props.mensagem &&
                                     // eslint-disable-next-line react/jsx-key
-                                    props.mensagem.map(msg=><Message {...msg}/>)
+                                    props.mensagem.map(msg=><Message key={msg.texto} {...msg}/>)
                                 }
                                 <Message tipo="" texto="" fild=""/>
                                 {props.children}
