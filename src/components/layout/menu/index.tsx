@@ -4,9 +4,10 @@ export const Menu: React.FC=()=>{
         <aside className="column is-2 is-narrow-mobile s-fullheight section is-hidden-mobile">
             <p className="menu-label is-hidden-touch"/>
                 <ul className="menu-list">
-                    <MenuItem href="/" label="Home   "/>
-                    <MenuItem href="/cadastros/produtos" label="Produtos"/>
-                    <MenuItem href="/" label="Config   "/>
+                    <MenuItem href="/" label="Home"/>
+                    <MenuItem href="/consultas/produtos" label="Produtos"/>
+                    <MenuItem href="/" label="Config"/>
+                    <MenuItem href="/" label="Sair"/>
                     
                 </ul>
             

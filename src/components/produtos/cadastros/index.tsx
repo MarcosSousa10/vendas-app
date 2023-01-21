@@ -6,6 +6,7 @@ import { Produto } from "../../../app/models/produtos";
 import { converterEmBigDecimal } from "../../../app/util/money";
 import { Alert } from "../../common/message";
 import * as yup from 'yup';
+import Link from "next/link";
 const validationSchema = yup.object().shape({
     sku: yup.string().trim().required("Campo Obrigatorio"),
     nome: yup.string().trim().required("Campo Obrigatorio"),
@@ -137,7 +138,7 @@ export const CadastroProdutos:React.FC = ()=>{
                         { id?"Atualizar":"Salvar"}</button>
                 </div>
                 <div className="control is-link">
-                    <button className="button">Voltar</button>
+                    <Link href={'/consultas/produtos'}><button className="button">Voltar</button></Link>
                 </div>
             </div>
             
