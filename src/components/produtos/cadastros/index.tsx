@@ -49,7 +49,7 @@ export const CadastroProdutos:React.FC = ()=>{
         setCadastro(produtoEncontrado.cadastro|| "")
             })
        
-    }}, [queryId])
+    }}, [queryId,service])
         const submit = ()=>{
          const produto:Produto = {
             id,
