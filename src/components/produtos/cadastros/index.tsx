@@ -42,14 +42,14 @@ export const CadastroProdutos:React.FC = ()=>{
             if(queryId){
                  service.carregarProduto(queryId).then(produtoEncontrado=>{
         setId(produtoEncontrado.id)
-        setSku(produtoEncontrado.sku||"")
-        setNome(produtoEncontrado.nome||"")
-        setDescricao(produtoEncontrado.descricao||"")
-        setPreco(formatReal(`${produtoEncontrado.preco}`)||"")
+        setSku(produtoEncontrado.sku||'')
+        setNome(produtoEncontrado.nome||'')
+        setDescricao(produtoEncontrado.descricao||'')
+        setPreco(formatReal(`${produtoEncontrado.preco}`)||'')
         setCadastro(produtoEncontrado.cadastro|| "")
             })
        
-    }}, [queryId,service])
+    }}, [queryId])
         const submit = ()=>{
          const produto:Produto = {
             id,
