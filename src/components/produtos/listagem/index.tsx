@@ -1,6 +1,7 @@
 import Layout from "../../layout"
 import Link from "next/link"
 import { TabelaProdutos } from "./tabela"
+import Router from "next/router"
 import { Produto } from "../../../app/models/produtos"
 import useSWR from 'swr';
 import { httpClient } from "../../../app/http";
@@ -10,7 +11,8 @@ export const ListagemProdutos: React.FC =()=>{
     const {data:result , error}= useSWR<AxiosResponse<Produto[]>>
     ('/api/produtos',url => httpClient.get(url))
     const editar =(produto:Produto)=>{
-        console.log(produto)
+        const url= `/cadastros/produtos?id=${produto.id}`
+        Router.push(url)
     }
     const deletar =(produto:Produto)=>{
         console.log(produto)

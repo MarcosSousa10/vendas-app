@@ -1,12 +1,16 @@
 import Layout from "../../layout";
 import { Input } from "../../common/input";
 import { useState } from "react";
+import { useEffect } from "react";
 import { useProdutoService } from "../../../app/services/produto.service";
 import { Produto } from "../../../app/models/produtos";
+import { formatReal } from "../../../app/util/money";
+import { useRouter } from "next/router";
 import { converterEmBigDecimal } from "../../../app/util/money";
 import { Alert } from "../../common/message";
 import * as yup from 'yup';
 import Link from "next/link";
+import { setMaxListeners } from "events";
 const validationSchema = yup.object().shape({
     sku: yup.string().trim().required("Campo Obrigatorio"),
     nome: yup.string().trim().required("Campo Obrigatorio"),
@@ -32,6 +36,20 @@ export const CadastroProdutos:React.FC = ()=>{
     const [cadastro, setCadastro]=useState<string>();
     const [messages, setMessages]=useState<Array<Alert>>([])
     const [errosr,setErrors]=useState<FormErros>({})
+    const router= useRouter();
+    const {id:queryId}= router.query;
+    useEffect(()=>{
+            if(queryId){
+                 service.carregarProduto(queryId).then(produtoEncontrado=>{
+        setId(produtoEncontrado.id)
+        setSku(produtoEncontrado.sku||"")
+        setNome(produtoEncontrado.nome||"")
+        setDescricao(produtoEncontrado.descricao||"")
+        setPreco(formatReal(`${produtoEncontrado.preco}`)||"")
+        setCadastro(produtoEncontrado.cadastro|| "")
+            })
+       
+    }}, [queryId])
         const submit = ()=>{
          const produto:Produto = {
             id,
