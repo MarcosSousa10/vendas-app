@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@4us-dev/utils@^0.0.15":
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/@4us-dev/utils/-/utils-0.0.15.tgz#9a898b792b3bf86ba956decf618e4ad30093cb53"
+  integrity sha512-orp0Afg0ZbuiRk8JCM+JyrT29CHSE6Dru+vzT+CRQlPem+UHy38cC80HTeXRY/YrhucoesuQ/JdQ6CAfgo5Uyg==
+
 "@babel/runtime@^7.15.4", "@babel/runtime@^7.20.7":
   version "7.20.7"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.20.7.tgz#fcb41a5a70550e04a7b708037c7c32f7f356d8fd"

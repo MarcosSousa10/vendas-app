@@ -10,6 +10,8 @@ import { converterEmBigDecimal } from "../../../app/util/money";
 import { Alert } from "../../common/message";
 import * as yup from 'yup';
 import Link from "next/link";
+import { InputMoney } from "../../common/input";
+import { InputCPF } from "../../common/input";
 import { setMaxListeners } from "events";
 const validationSchema = yup.object().shape({
     sku: yup.string().trim().required("Campo Obrigatorio"),
@@ -112,15 +114,15 @@ export const CadastroProdutos:React.FC = ()=>{
             <div className="columns"> 
             <Input label="SKU: *"
                 columnClasses="is-half"
-                onChange={setSku}
+                onChange={e=>setSku(e.target.value)}
                 value={sku}
                 id="inputSKU"
                 placeholder="Digite o SKU do produto"
                 error={errosr.sku}
             />
-            <Input label="Preço: *"
+            <InputMoney label="Preço: *"
                 columnClasses="is-half"
-                onChange={setPreco}
+                onChange={e=>setPreco(e.target.value)}
                 value={preco}
                 id="inputPreco"
                 placeholder="Digite o Preço do produto"
@@ -132,7 +134,7 @@ export const CadastroProdutos:React.FC = ()=>{
             <div className="columns">
             <Input label="Nome: *"
                 columnClasses="is-full"
-                onChange={setNome}
+                onChange={e=>setNome(e.target.value)}
                 value={nome}
                 id="inputNome"
                 placeholder="Digite o Nome do produto"
