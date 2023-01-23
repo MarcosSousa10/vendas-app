@@ -5,7 +5,7 @@ import {FormatUtils,StringUtils} from '@4us-dev/utils'
 const formatUtils = new FormatUtils;
 const stringUtils= new StringUtils;
 interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
-    formatter?:(value:string) =>string;
+    formatter?:(value:string) =>string | any;
     label: string;
     id:string;
     columnClasses?: string;

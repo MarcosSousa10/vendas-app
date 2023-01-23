@@ -11,8 +11,6 @@ import { Alert } from "../../common/message";
 import * as yup from 'yup';
 import Link from "next/link";
 import { InputMoney } from "../../common/input";
-import { InputCPF } from "../../common/input";
-import { setMaxListeners } from "events";
 const validationSchema = yup.object().shape({
     sku: yup.string().trim().required("Campo Obrigatorio"),
     nome: yup.string().trim().required("Campo Obrigatorio"),
