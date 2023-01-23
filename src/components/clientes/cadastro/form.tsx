@@ -2,7 +2,7 @@ import { Cliente } from "../../../app/models/clientes";
 import { useFormik } from "formik";
 import { Input } from "../../common/input";
 import { formatReal } from "../../../app/util/money";
-import { InputCPF } from "../../common/input";
+import { InputCPF,InputTelefone } from "../../common/input";
 interface ClienteFormProps {
     cliente: Cliente;
     onSubmit: (cliente: Cliente) => void;
@@ -66,7 +66,7 @@ export const ClienteForm: React.FC<ClienteFormProps> = ({
             <div className="columns">
                 <Input id="email" name="email" onChange={formik.handleChange}
                     value={formik.values.email} label="Email *" columnClasses="is-half" autoComplete="off" />
-                <Input id="telefone" name="telefone" columnClasses="is-half" onChange={formik.handleChange}
+                <InputTelefone id="telefone" name="telefone" columnClasses="is-half" onChange={formik.handleChange}
                     value={formik.values.telefone} label="Telefone *" autoComplete="off" />
             </div>
             <div className="field is-grouped">
