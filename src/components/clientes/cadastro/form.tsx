@@ -37,8 +37,9 @@ export const ClienteForm: React.FC<ClienteFormProps> = ({
         initialValues: { ...formScheme,...cliente},
         onSubmit,
         enableReinitialize: true,
-        validate
+        validationSchema: validationScheme
     });
+    console.log(formik.errors);
     const caixaAlta=(value: string)=>{
         return value.toUpperCase();
     }
@@ -50,11 +51,13 @@ export const ClienteForm: React.FC<ClienteFormProps> = ({
                     <Input id="id" name="id" disabled
                         value={formik.values.id} label="Codigo:" columnClasses="is-half" autoComplete="off" />
                     <Input id="cadastro" name="cadastro" columnClasses="is-half" disabled
-                        value={formik.values.cadastro} label="Data Cadastro " autoComplete="off" />
+                        value={formik.values.cadastro} label="Data Cadastro " autoComplete="off" 
+                        />
                 </div>}
             <div className="columns">
                 <Input id="nome" name="nome" onChange={formik.handleChange}
-                    value={formik.values.nome} label="Nome *" formatter={caixaAlta} columnClasses="is-full" autoComplete="off" />
+                    value={formik.values.nome} label="Nome *" formatter={caixaAlta} columnClasses="is-full" autoComplete="off" 
+                    error={formik.errors.nome}/>
             </div>
             <div className="columns">
                <InputCPF id="cpf" 
@@ -64,9 +67,12 @@ export const ClienteForm: React.FC<ClienteFormProps> = ({
                       columnClasses="is-half"
                       onChange={formik.handleChange} 
                       value={formik.values.cpf} 
+                      error={formik.errors.cpf}
+
                       />
                 <InputDate id="dataNascimento" name="dataNascimento" columnClasses="is-half" onChange={formik.handleChange}
-                    value={formik.values.dataNascimento} label="Data Nascimento *" autoComplete="off" />
+                    value={formik.values.dataNascimento} label="Data Nascimento *" autoComplete="off" 
+                    error={formik.errors.dataNascimento}/>
             </div>
             <div className="columns">
                <Input id="endereco" 
@@ -75,13 +81,16 @@ export const ClienteForm: React.FC<ClienteFormProps> = ({
                       autoComplete="off" 
                       columnClasses="is-full"
                       onChange={formik.handleChange} 
-                      value={formik.values.endereco} />
+                      value={formik.values.endereco} 
+                      error={formik.errors.endereco}/>
            </div>  
             <div className="columns">
-                <InputEmail id="email" name="email" onChange={formik.handleChange}
-                    value={formik.values.email} label="Email *" columnClasses="is-half" autoComplete="off" />
+                <Input id="email" name="email" onChange={formik.handleChange}
+                    value={formik.values.email} label="Email *" columnClasses="is-half" autoComplete="off" 
+                    error={formik.errors.email}/>
                 <InputTelefone id="telefone" name="telefone" columnClasses="is-half" onChange={formik.handleChange}
-                    value={formik.values.telefone} label="Telefone *" autoComplete="off" />
+                    value={formik.values.telefone} label="Telefone *" autoComplete="off"
+                    error={formik.errors.telefone} />
             </div>
             <div className="field is-grouped">
                 <button type="submit" className="button" >
