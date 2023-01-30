@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import { Input } from "../../common/input";
 import { formatReal } from "../../../app/util/money";
 import { InputCPF,InputTelefone,InputEmail, InputDate } from "../../common/input";
+import * as Yup from 'yup';
 interface ClienteFormProps {
     cliente: Cliente;
     onSubmit: (cliente: Cliente) => void;
@@ -17,6 +18,17 @@ const formScheme: Cliente = {
     nome: '',
     telefone: ''
 }
+const campoObrigatorioMensagem ="Campo obrigatorio";
+const campoObigatorioValidation= Yup.string().trim().required(campoObrigatorioMensagem);
+const validationScheme= Yup.object().shape({
+    cpf: Yup.string().trim().required(campoObrigatorioMensagem).length(14,"CPF Invalido!"),
+    dataNascimento: Yup.string().trim().required(campoObrigatorioMensagem).length(10,"Data Invalida!"),
+    email: Yup.string().trim().required(campoObrigatorioMensagem).email("Email Invalido!"),
+    endereco: campoObigatorioValidation,
+    nome: campoObigatorioValidation,
+    telefone: campoObigatorioValidation,
+
+})
 export const ClienteForm: React.FC<ClienteFormProps> = ({
     cliente,
     onSubmit
@@ -24,6 +36,8 @@ export const ClienteForm: React.FC<ClienteFormProps> = ({
     const formik = useFormik<Cliente>({
         initialValues: { ...formScheme,...cliente},
         onSubmit,
+        enableReinitialize: true,
+        validate
     });
     const caixaAlta=(value: string)=>{
         return value.toUpperCase();

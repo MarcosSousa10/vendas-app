@@ -1,8 +1,6 @@
 import React, { InputHTMLAttributes } from "react"
 import { formatReal } from "../../../app/util/money"
-import {FormatUtils,StringUtils} from '@4us-dev/utils'
-import { number } from "yup";
-
+import {FormatUtils,StringUtils} from '@4us-dev/utils';
 const formatUtils = new FormatUtils;
 const stringUtils= new StringUtils;
 interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
@@ -75,8 +73,10 @@ export const InputDate: React.FC<InputProps> = (props: InputProps)=>{
         <Input {...props} maxLength={10} formatter={formatDate}/>
     )
 }
+
 export const InputEmail: React.FC<InputProps> = (props: InputProps) => {
     return (
-        <Input {...props} formatter={stringUtils.hideEmail} />
+     
+      <Input {...props} formatter={stringUtils.hideEmail} />
     )
 }
