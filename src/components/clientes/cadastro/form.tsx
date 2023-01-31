@@ -93,9 +93,11 @@ export const ClienteForm: React.FC<ClienteFormProps> = ({
                     error={formik.errors.telefone} />
             </div>
             <div className="field is-grouped">
+                <div className="control is-link">
                 <button type="submit" className="button" >
                     {formik.values.id ? "Atualizar" : "Salvar"}
                 </button>
+                </div>
             </div>
 
 
