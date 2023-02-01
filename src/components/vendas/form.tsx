@@ -10,20 +10,19 @@ import { Page } from "../../app/models/common";
 import { Cliente } from "../../app/models/clientes";
 import { useClienteService } from "../../app/services/cliente.service";
 import { useProdutoService } from "../../app/services/produto.service";
+
 import { Button } from "primereact/button";
 import { Produto } from "../../app/models/produtos";
 import { InputText } from "primereact/inputtext";
 import { Dialog } from "primereact/components/dialog/Dialog";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { idText } from "typescript";
-import { number } from "yup";
-import { isIPv4 } from "net";
+
 interface VendasFormProps {
     onSubmit: (venda: Venda) => void;
 }
 const formScheme: Venda = {
-    cliente: null,
+    cliente: null!,
     itens: [],
     total: 0,
     formaPagamento: ''
@@ -33,6 +32,7 @@ export const VendasForm: React.FC<VendasFormProps> = ({
 }) => {
     const clienteService = useClienteService();
     const produtoService = useProdutoService();
+    const [listaProdutos, setListaProdutos] = useState<Produto[]>([])
     const [mensagem, setMensagem] = useState<string>('')
     const [quantidadeProduto, setQuantidadeProduto] = useState<number>(0)
     const [codigoProduto, setCodigoProduto] = useState<string>('');
@@ -74,7 +74,7 @@ export const VendasForm: React.FC<VendasFormProps> = ({
         if (JaExistemOItemNaVenda) {
             itensAdicionados?.forEach((iv: ItemVenda) => {
                 if (iv.produto?.id === produto.id) {
-                    iv.quantidade = iv.quantidade + quantidadeProduto
+                    iv.quantidade = iv.quantidade! + quantidadeProduto
                 }
             })
         } else {
@@ -146,7 +146,7 @@ export const VendasForm: React.FC<VendasFormProps> = ({
                             <Column header="Total" body={(iv: ItemVenda) => {
                                 return (
                                     <div>
-                                        {iv.produto?.preco * iv.quantidade}
+                                        {iv.produto?.preco! * iv.quantidade!}
                                     </div>
                                 )
                             }} />
@@ -159,8 +159,11 @@ export const VendasForm: React.FC<VendasFormProps> = ({
                 position="top" visible={!!mensagem}
                 onHide={handleFecharProdutoNaoEncontrado}
                 footer={dialogMensagemFooter}>
+                
                 {mensagem}
             </Dialog>
+          
+          
         </form>
     )
 }

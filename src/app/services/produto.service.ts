@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios"
+import { Axios, AxiosResponse } from "axios"
 import { Produto } from "../models/produtos"
 import { httpClient } from "../http"
 const resourceURL: string ="/api/produtos"
@@ -23,11 +23,15 @@ export const useProdutoService=()=>{
     const url:string =`${resourceURL}/${id}`
     await httpClient.delete(url)
    }
-
+   const listar= async(): Promise<Produto[]>=>{
+    const response: AxiosResponse<Produto[]>  = await httpClient.get(resourceURL);
+    return response.data;
+   }
     return {
         salvar,
         atualizar,
         carregarProduto,
-        deletar
+        deletar,
+        listar
     }
 }
