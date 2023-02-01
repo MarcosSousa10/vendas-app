@@ -1,0 +1,2 @@
+
+export {Vendas}  from './vendas';
