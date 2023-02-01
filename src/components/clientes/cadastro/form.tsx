@@ -4,6 +4,7 @@ import { Input } from "../../common/input";
 import { formatReal } from "../../../app/util/money";
 import { InputCPF,InputTelefone,InputEmail, InputDate } from "../../common/input";
 import * as Yup from 'yup';
+import Router from "next/router";
 interface ClienteFormProps {
     cliente: Cliente;
     onSubmit: (cliente: Cliente) => void;
@@ -94,8 +95,13 @@ export const ClienteForm: React.FC<ClienteFormProps> = ({
             </div>
             <div className="field is-grouped">
                 <div className="control is-link">
-                <button type="submit" className="button" >
+                <button type="submit" className="button is-success" >
                     {formik.values.id ? "Atualizar" : "Salvar"}
+                </button>
+                </div>
+                <div className="control">
+                <button type="button" onClick={e=>Router.push("/consultas/clientes")} className="button" >
+                    Voltar
                 </button>
                 </div>
             </div>

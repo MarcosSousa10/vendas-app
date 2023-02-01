@@ -101,6 +101,7 @@ export const ListagemClientes: React.FC = () => {
                             Consultar                     
                         </button>
                     </div>
+                    
                     <div className="control is-link">
                         <button type="submit" 
                                 onClick={e => Router.push("/cadastros/clientes")} 
