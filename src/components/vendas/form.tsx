@@ -9,7 +9,9 @@ import { useState } from "react";
 import { Page } from "../../app/models/common";
 import { Cliente } from "../../app/models/clientes";
 import { useClienteService } from "../../app/services/cliente.service";
+import { useProdutoService } from "../../app/services/produto.service";
 import { Button } from "primereact/button";
+import { Produto } from "../../app/models/produtos";
 import { InputText } from "primereact/inputtext";
 interface VendasFormProps {
     onSubmit: (venda: Venda) => void;
@@ -24,7 +26,9 @@ export const VendasForm: React.FC<VendasFormProps> = ({
     onSubmit,
 }) => {
     const clienteService = useClienteService();
+    const produtoService= useProdutoService();
     const [codigoProduto, setCodigoProduto] = useState<string>('');
+    const [produto, setProduto]=useState<Produto>(null);
     const [listaClientes, setListaClientes] = useState<Page<Cliente>>({
         content: [],
         first: 0,
@@ -45,7 +49,13 @@ export const VendasForm: React.FC<VendasFormProps> = ({
         formik.setFieldValue("cliente", clienteSelecionado)
     }
     const handleCodigoProdutoSelect = (event: any) => {
-        console.log(codigoProduto)
+        produtoService.carregarProduto(codigoProduto)
+        .then(produtoEncontrado => setProduto(produtoEncontrado))
+        .catch(error=> console.log(error))
+    }
+    const handleAddProduto=()=>{
+        const produtosJaAdicionados= formik.values.produtos;
+        produtosJaAdicionados?.push(produto);
     }
     return (
         <form onSubmit={formik.handleSubmit}>
@@ -65,7 +75,7 @@ export const VendasForm: React.FC<VendasFormProps> = ({
                     </div>
                     <div className="p-col-6">
                     <span className="p-float-label">
-                            <AutoComplete />
+                            <AutoComplete value={produto} field="nome" />
                         </span>
                     </div>
                     <div className="p-col-2">
@@ -75,7 +85,7 @@ export const VendasForm: React.FC<VendasFormProps> = ({
                         </span>
                     </div>
                     <div className="p-col-2">
-                        <Button label="adicionar"/>
+                        <Button label="adicionar" onClick={handleAddProduto}/>
                     </div>
                     </div>
                     
