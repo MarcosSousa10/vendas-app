@@ -159,9 +159,9 @@ export const VendasForm: React.FC<VendasFormProps> = ({
                 position="top" visible={!!mensagem}
                 onHide={handleFecharProdutoNaoEncontrado}
                 footer={dialogMensagemFooter}>
-                
-                {mensagem}
-            </Dialog>
+                    {mensagem}
+              
+            </Dialog> 
           
           
         </form>
