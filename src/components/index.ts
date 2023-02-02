@@ -1,2 +1,2 @@
 
-export {Vendas}  from './vendas';
+export { Vendas } from './vendas';
