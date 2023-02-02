@@ -5,10 +5,10 @@ export interface Venda {
     cliente?: Cliente;
     itens?: Array<ItemVenda>;
     formaPagamento?: string;
-    total?: number;
+    total: number;
 }
 export interface ItemVenda {
-    produto?: Produto;
-    quantidade?: number;
+    produto: Produto;
+    quantidade: number;
 
 }

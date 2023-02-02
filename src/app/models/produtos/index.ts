@@ -2,7 +2,7 @@ export interface Produto{
     id?: string;
     nome?: string;
     descricao?: string;
-    preco?: number;
+    preco: number;
     sku?: string;
     cadastro?: string;
 }
