@@ -33,6 +33,8 @@ export const VendasForm: React.FC<VendasFormProps> = ({
     const clienteService = useClienteService();
     const produtoService = useProdutoService();
     const [listaProdutos, setListaProdutos] = useState<Produto[]>([])
+    const [listaFiltradaProdutos, setListaFiltradaProdutos] = useState<Produto[]>([])
+
     const [mensagem, setMensagem] = useState<string>('')
     const [quantidadeProduto, setQuantidadeProduto] = useState<number>(0)
     const [codigoProduto, setCodigoProduto] = useState<string>('');
@@ -56,6 +58,7 @@ export const VendasForm: React.FC<VendasFormProps> = ({
         const clienteSelecionado: Cliente = e.value;
         formik.setFieldValue("cliente", clienteSelecionado)
     }
+ 
     const handleCodigoProdutoSelect = (event: any) => {
         if (codigoProduto) {
             produtoService.carregarProduto(codigoProduto)
@@ -100,6 +103,19 @@ export const VendasForm: React.FC<VendasFormProps> = ({
         setCodigoProduto('')
         setQuantidadeProduto(0);
     }
+    const handleProdutoAutoComplete = async (e: AutoCompleteCompleteMethodParams) => {
+        const nomeProduto = e.query;
+        if (!listaProdutos.length) {
+         const produtosEncontrados =   await produtoService.listar();
+         setListaProdutos(produtosEncontrados);
+        }
+        const produtosEncontrados = listaProdutos.filter((produto: Produto) => {
+            return produto.nome?.toUpperCase().includes(e.query.toUpperCase()
+            )
+        }
+        );
+        setListaFiltradaProdutos(produtosEncontrados)
+    }
     const disableAddProdutoButton = () => {
         return !produto || !quantidadeProduto
     }
@@ -122,7 +138,8 @@ export const VendasForm: React.FC<VendasFormProps> = ({
                     </div>
                     <div className="p-col-6">
                         <span className="p-float-label">
-                            <AutoComplete value={produto} field="nome" />
+                            <AutoComplete value={produto} completeMethod={handleProdutoAutoComplete} id="produto" name="produto"
+                             onChange={e=>setProduto(e.value)} suggestions={listaFiltradaProdutos} field="nome" />
                         </span>
                     </div>
                     <div className="p-col-2">
@@ -159,11 +176,11 @@ export const VendasForm: React.FC<VendasFormProps> = ({
                 position="top" visible={!!mensagem}
                 onHide={handleFecharProdutoNaoEncontrado}
                 footer={dialogMensagemFooter}>
-                    {mensagem}
-              
-            </Dialog> 
-          
-          
+                {mensagem}
+
+            </Dialog>
+
+
         </form>
     )
 }
