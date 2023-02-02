@@ -28,6 +28,8 @@ const formatadorMoney = new Intl.NumberFormat('pt-br', {
 
 interface VendasFormProps {
     onSubmit: (venda: Venda) => void;
+    onNovaVenda:()=>void;
+    vendaRealizada: boolean;
 }
 const formScheme: Venda = {
     cliente: null!,
@@ -37,12 +39,14 @@ const formScheme: Venda = {
 }
 export const VendasForm: React.FC<VendasFormProps> = ({
     onSubmit,
+    onNovaVenda,
+    vendaRealizada
 }) => {
     const clienteService = useClienteService();
     const produtoService = useProdutoService();
     const [listaProdutos, setListaProdutos] = useState<Produto[]>([])
     const [listaFiltradaProdutos, setListaFiltradaProdutos] = useState<Produto[]>([])
-    const formaPagamento: String[] = ["Dinheiro", "Cartão"]
+    const formaPagamento: String[] = ["DINHEIRO", "CARTAO"]
     const [mensagem, setMensagem] = useState<string>('')
     const [quantidadeProduto, setQuantidadeProduto] = useState<number>(0)
     const [codigoProduto, setCodigoProduto] = useState<string>('');
@@ -138,6 +142,12 @@ export const VendasForm: React.FC<VendasFormProps> = ({
             return 0;
         }
     }
+    const realizarNovaVenda=()=>{
+        onNovaVenda();
+        formik.resetForm();
+        formik.setFieldValue("itens", [])
+        formik.setFieldTouched("itens",false)
+    }
     return (
         <form onSubmit={formik.handleSubmit}>
             <div className="p-fluid">
@@ -224,7 +234,14 @@ export const VendasForm: React.FC<VendasFormProps> = ({
                         </div>
                     </div>
                 </div>
+                {!vendaRealizada &&
                 <Button type="submit" label="Finalizar" />
+                }
+                {
+                    vendaRealizada&&
+                    <Button type="button" onClick={realizarNovaVenda} label="Nova Venda" className="p-button-success"/>
+                }
+                
             </div>
             <Dialog header="Atenção!"
                 position="top" visible={!!mensagem}
