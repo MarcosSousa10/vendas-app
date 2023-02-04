@@ -12,8 +12,7 @@ export const RotaAutenticada:React.FC<RotaAutenticadaProps>=({
   if (session) {
     return (
        <>
-        Signed in as {session.user.email} <br />
-        <button onClick={() => signOut()}>Sign out</button>
+        Seja Bem Vindo {session.user?.name} <br />
         {children}
       </>
     )
