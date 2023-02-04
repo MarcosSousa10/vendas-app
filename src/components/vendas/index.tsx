@@ -4,6 +4,7 @@ import { VendasForm } from "./form";
 import { useVendaService } from "../../app/services/vendas.service";
 import { useState } from "react";
 import { Alert } from "../common/message";
+import { RotaAutenticada } from "../rotaautenticada";
 
 export const Vendas: React.FC = () => {
     const service = useVendaService();
