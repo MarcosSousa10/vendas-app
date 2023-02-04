@@ -36,7 +36,7 @@ export const RelatorioVendas: React.FC = () => {
 
     const formik = useFormik<RelatorioVendasForm>({
         onSubmit: handleSubmit,
-        initialValues: { cliente: null, dataFim: '', dataInicio: '' }
+        initialValues: { cliente: null!, dataFim: '', dataInicio: '' }
     })
 
     const handleClienteAutoComplete = (e: AutoCompleteCompleteMethodParams) => {

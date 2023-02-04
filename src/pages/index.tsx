@@ -1,7 +1,13 @@
 import Head from 'next/head'
 import Layout from '../components/layout';
-const Home: React.FC =()=>{
- return (
+import { Dashboard } from '../components/dashboard';
+import { useDashboardService } from '../app/services/dashboard.service';
+import { DashboardData } from '../app/models/dashboard';
+interface HomeProps{
+  dashboard: DashboardData
+}
+const Home: React.FC = (props: HomeProps) => {
+  return (
     <div>
       <Head>
         <title>Vendas App</title>
@@ -9,9 +15,22 @@ const Home: React.FC =()=>{
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-     <Layout/>
+      <Layout titulo='Dashboard'>
+        <Dashboard clientes={props.dashboard.clientes} produtos={props.dashboard.produtos} vendas={props.dashboard.vendas} vendasPorMes={props.dashboard.vendasPorMes}/>
+      </Layout>
+
     </div>
-    
+
   )
+}
+export async function getStaticProps(context:any){
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const service = useDashboardService();
+  const dashboard :DashboardData= await service.get();
+  return{
+    props:{
+      dashboard
+    }, revalidate: 30
+  }
 }
 export default Home;
