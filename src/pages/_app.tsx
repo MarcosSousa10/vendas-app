@@ -8,6 +8,7 @@ import 'primeflex/primeflex.css'
 import { SessionProvider } from "next-auth/react"
 import { RotaAutenticada } from '../components/rotaautenticada'
 
+
 export default function App({ Component,  pageProps: { session, ...pageProps }, }: AppProps) {
   return (
 <SessionProvider session={pageProps.session}>

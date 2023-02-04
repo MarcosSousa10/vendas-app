@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@4us-dev/utils": "^0.0.15",
+    "@mdi/js": "^7.1.96",
+    "@mdi/react": "^1.6.1",
     "@next/font": "13.1.1",
     "@types/node": "18.11.18",
     "@types/react": "18.0.26",
