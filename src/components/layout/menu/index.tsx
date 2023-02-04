@@ -1,4 +1,5 @@
 import Link from "next/link";
+import {signOut } from "next-auth/react"
 export const Menu: React.FC = () => {
     return (
         <aside className="column is-2 is-narrow-mobile s-fullheight section is-hidden-mobile">
@@ -9,7 +10,7 @@ export const Menu: React.FC = () => {
                 <MenuItem href="/consultas/clientes" label="Clientes" />
                 <MenuItem href="/vendas/nova-venda" label="Venda" />
                 <MenuItem href="/vendas/relatorio-vendas" label="Relatorio" />
-                <MenuItem href="/" label="Sair" />
+                <MenuItem onClick={()=>signOut()} href="/" label="Sair" />
 
             </ul>
 
@@ -19,13 +20,15 @@ export const Menu: React.FC = () => {
 interface MenuItemProps {
     href: string;
     label: string;
+    onClick?: ()=>void;
 }
 const MenuItem: React.FC<MenuItemProps> = (props: MenuItemProps) => {
     return (
         <li>
-            <Link href={props.href}>
-
-                <span className="icon"></span> {props.label}
+            <Link href={props.href} onClick={props.onClick}>
+                    
+                        <span className="icon"></span> {props.label}
+                
 
             </Link>
         </li>
