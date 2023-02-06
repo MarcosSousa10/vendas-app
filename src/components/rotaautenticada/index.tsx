@@ -14,9 +14,11 @@ export const RotaAutenticada:React.FC<RotaAutenticadaProps>=({
   const { data: session } = useSession()
 console.log(session);
   if (session) {
+    const imagem:any = session.user?.image
     return (
        <>
-       <img src={session.user?.image} alt="" />
+       
+       <img src={imagem} />
         Seja Bem Vindo {session.user?.name} <br />
         {children}
       </>
