@@ -7,6 +7,7 @@ interface HomeProps{
   dashboard: DashboardData
 }
 const Home: React.FC = (props: HomeProps) => {
+  
   return (
     <div>
       <Head>

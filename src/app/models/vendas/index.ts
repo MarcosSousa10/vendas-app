@@ -3,7 +3,7 @@ import { Produto } from "../produtos";
 
 export interface Venda {
     cliente?: Cliente;
-    itens?: Array<ItemVenda>;
+    itens: Array<ItemVenda>;
     formaPagamento?: string;
     total: number;
 }

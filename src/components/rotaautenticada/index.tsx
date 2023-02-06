@@ -12,18 +12,19 @@ export const RotaAutenticada:React.FC<RotaAutenticadaProps>=({
     children
 })=>{
   const { data: session } = useSession()
-
+console.log(session);
   if (session) {
     return (
        <>
-        Seja Bem Vindo {session.user.email} <br />
+       <img src={session.user?.image} alt="" />
+        Seja Bem Vindo {session.user?.name} <br />
         {children}
       </>
     )
   }
   return (
     <>
-       <button className="button is-large"  onClick={() => signIn('github')}>
+       <button className="button is-large"  onClick={() => signIn()}>
     <span className="icon is-medium">
     <Icon path={mdiAccount}
         title="User Profile"

@@ -8,7 +8,7 @@ interface DashboardProps {
     clientes?: number;
     produtos?: number;
     vendas?: number;
-    vendasPorMes:VendaPorMes[];
+    vendasPorMes?:VendaPorMes[];
 }
 
 
@@ -39,15 +39,15 @@ export const Dashboard: React.FC<DashboardProps> = ({
     const produtosCardStyle = {
         background: "red",
         color: "white"
-    }
+    };
     const clientesCardStyle = {
         background: "blue",
         color: "white"
-    }
+    };
     const vendasCardStyle = {
         background: "green",
         color: "white"
-    }
+    };
     return (
         <div className="p-fluid">
             <div className="p-grid">

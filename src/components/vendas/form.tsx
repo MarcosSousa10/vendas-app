@@ -135,9 +135,9 @@ export const VendasForm: React.FC<VendasFormProps> = ({
         return !produto || !quantidadeProduto
     }
     const totalVenda = () => {
-        const totais: number[] = formik.values.itens?.map(iv => iv.quantidade * iv.produto?.preco);
+        const totais:number[] = formik.values.itens.map(iv => iv.quantidade * iv.produto?.preco);
         if (totais?.length) {
-            return totais.reduce((somatoriaAtual = 0, valorItemAtual) => somatoriaAtual + valorItemAtual);
+            return totais.reduce((somatoriaAtual = 0, valorItemAtual:number) => somatoriaAtual + valorItemAtual);
         } else {
             return 0;
         }
@@ -183,7 +183,7 @@ export const VendasForm: React.FC<VendasFormProps> = ({
                             disabled={disableAddProdutoButton()} type="button" onClick={handleAddProduto} />
                     </div>
                     <div className="p-col-12">
-                        <DataTable value={formik.values.itens} emptyMessage="Nenhum Produto Adicionando" >
+                        <DataTable  value={formik.values.itens} emptyMessage="Nenhum Produto Adicionando">
                             <Column body={(item: ItemVenda) => {
                                 const handleRemoverItem = () => {
                                     const novaLista = formik.values.itens?.filter(iv => iv.produto?.id !== item.produto?.id)
