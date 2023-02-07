@@ -12,7 +12,7 @@ export default NextAuth({
     providers:[
         Providers({
             clientId: 'Iv1.c9096e133ca5352d',
-            clientSecret: '52b205eef69792ebd7495682d07c58cdc3c520c5',
+            clientSecret: '5d653fc8a6b8770da117c441daac3a01386988bb',
         }),
         Auth0Provider({
             clientId: 'x834JoVESoE8G75knKIrgC28sHse7Fvv',

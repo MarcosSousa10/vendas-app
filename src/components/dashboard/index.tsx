@@ -8,7 +8,7 @@ interface DashboardProps {
     clientes?: number;
     produtos?: number;
     vendas?: number;
-    vendasPorMes?:VendaPorMes[];
+    vendasPorMes:VendaPorMes[];
 }
 
 
@@ -20,7 +20,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
 }) => {
     const [charData,setCharData]= useState({});
     const carregaDadosGrafico=()=>{
-       const labels: string[] = vendasPorMes?.map(vm=>MESES[vm.mes - 1]);
+       const labels: string[] = vendasPorMes.map(vm=>MESES[vm.mes - 1]);
        const valores= vendasPorMes?.map(vm=>vm.valor);
        const dadosGraficos ={
         labels:labels,

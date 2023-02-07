@@ -14,7 +14,7 @@ import { Dropdown } from 'primereact/dropdown'
 import { Button } from "primereact/button";
 import { Produto } from "../../app/models/produtos";
 import { InputText } from "primereact/inputtext";
-import { Dialog } from "primereact/components/dialog/Dialog";
+import { Dialog } from "primereact/dialog";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { number } from "yup";
@@ -135,7 +135,7 @@ export const VendasForm: React.FC<VendasFormProps> = ({
         return !produto || !quantidadeProduto
     }
     const totalVenda = () => {
-        const totais:number[] = formik.values.itens.map(iv => iv.quantidade * iv.produto?.preco);
+        const totais:any = formik.values.itens?.map(iv => iv.quantidade * iv.produto?.preco);
         if (totais?.length) {
             return totais.reduce((somatoriaAtual = 0, valorItemAtual:number) => somatoriaAtual + valorItemAtual);
         } else {
