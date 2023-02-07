@@ -29,7 +29,7 @@ export const ListagemClientes: React.FC = () => {
     });
 
     const handleSubmit = (filtro: ConsultaClientesForm) => {
-        handlePage(null);
+        handlePage(null!);
     }
 
     const { 
@@ -51,7 +51,7 @@ export const ListagemClientes: React.FC = () => {
 
     const deletar = (cliente: Cliente) => {
         service.deletar(cliente.id).then(result => {
-            handlePage(null)
+            handlePage(null!)
         })
     }
 

@@ -4,7 +4,7 @@ import { Dashboard } from '../components/dashboard';
 import { useDashboardService } from '../app/services/dashboard.service';
 import { DashboardData } from '../app/models/dashboard';
 interface HomeProps{
-  dashboard: DashboardData
+  dashboard?: DashboardData
 }
 const Home: React.FC = (props: HomeProps) => {
   
@@ -17,7 +17,7 @@ const Home: React.FC = (props: HomeProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout titulo='Dashboard'>
-        <Dashboard clientes={props.dashboard.clientes} produtos={props.dashboard.produtos} vendas={props.dashboard.vendas} vendasPorMes={props.dashboard.vendasPorMes}/>
+        <Dashboard clientes={props.dashboard?.clientes} produtos={props.dashboard?.produtos} vendas={props.dashboard?.vendas} vendasPorMes={props.dashboard?.vendasPorMes}/>
       </Layout>
 
     </div>
