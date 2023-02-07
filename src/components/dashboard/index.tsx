@@ -77,7 +77,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
             </div>
             <div className="p-grid">
                 <div className="p-col">
-                    <Chart type="bar" data={charData} style={{ position: 'relative', with: '70%' }}/>
+                    <Chart type="bar" data={charData} className="container" style={{ position: 'relative',  maxHeight: 'calc(100vh - 200px)' }}/>
             </div>
             </div>
 

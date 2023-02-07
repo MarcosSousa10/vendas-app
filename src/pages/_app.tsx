@@ -10,11 +10,12 @@ import { SessionProvider } from "next-auth/react"
 import { RotaAutenticada } from '../components/rotaautenticada'
 
 
+
 export default function App({ Component,  pageProps: { session, ...pageProps }, }: AppProps) {
   return (
 <SessionProvider session={pageProps.session}>
   <RotaAutenticada >
-    <Component {...pageProps} />
+<Component {...pageProps} />   
   </RotaAutenticada>
     
     </SessionProvider>
