@@ -108,6 +108,7 @@ export const VendasForm: React.FC<VendasFormProps> = ({
     }
     const dialogMensagemFooter = () => {
         return (
+            
             <div>
                 <Button label="Ok" onClick={handleFecharProdutoNaoEncontrado} />
             </div>
@@ -149,6 +150,7 @@ export const VendasForm: React.FC<VendasFormProps> = ({
         formik.setFieldTouched("itens", false)
     }
     return (
+        <div className="container">
         <form onSubmit={formik.handleSubmit}>
             <div className="p-fluid">
                 <div className="p-field">
@@ -253,5 +255,6 @@ export const VendasForm: React.FC<VendasFormProps> = ({
 
 
         </form>
+        </div>
     )
 }

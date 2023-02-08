@@ -50,11 +50,12 @@ export const RelatorioVendas: React.FC = () => {
         <Layout titulo="Relatório de Vendas">
             <form onSubmit={formik.handleSubmit}>
                 <div className="p-fluid">
-                    <div className="p-grid">
+                    <div className="p-grid m-2">
                         <div className="p-col-12">
                             <AutoComplete suggestions={listaClientes.content}
                                         completeMethod={handleClienteAutoComplete}
                                         value={formik.values.cliente}
+                                        className="m-2 "
                                         field="nome"
                                         id="cliente"
                                         name="cliente"
@@ -63,19 +64,23 @@ export const RelatorioVendas: React.FC = () => {
                                         }}
                             />
                         </div>
-                        <div className="p-col-6">
+                        
+                        <div className="p-col-6 ">
                             <InputDate id="dataInicio" 
                                     label="Data Início"
                                     name="dataInicio" 
+                                    className="form-control"
                                     value={formik.values.dataInicio}
                                     onChange={formik.handleChange} />
                         </div>
-                        <div className="p-col-6">
+                        <div className="p-col-6 ">
                             <InputDate id="dataFim" 
                                     name="dataFim" 
+                                    className="form-control"
                                     label="Data Fim"
                                     value={formik.values.dataFim}
                                     onChange={formik.handleChange} />
+                        
                         </div>
                         <div className="p-col">
                             <Button label="Gerar Relatório" type="submit" />

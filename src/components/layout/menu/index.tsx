@@ -19,7 +19,7 @@ export const Menu: React.FC = () => {
             <Nav.Link href="#pricing"><MenuItem href="/consultas/clientes" label="Clientes" /></Nav.Link>
             <Nav.Link href="#pricing"> <MenuItem href="/vendas/nova-venda" label="Venda" /></Nav.Link>
             <Nav.Link href="#pricing"><MenuItem href="/vendas/relatorio-vendas" label="Relatorio" /></Nav.Link>
-            <Nav.Link href="#pricing"><MenuItem onClick={()=>signOut()} href="/" label="Sair" /></Nav.Link>
+            <Nav.Link href="#pricing"></Nav.Link>
             <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
@@ -33,14 +33,13 @@ export const Menu: React.FC = () => {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">More deets</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
+            <Nav.Link href="#/" eventKey={2}><MenuItem onClick={()=>signOut()} href="/" label="Sair" /></Nav.Link>
+            <Nav.Link eventKey={2} href="/">
               Dank memes
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
-      <MenuItem href="/" label="Home" />
                       
                
               

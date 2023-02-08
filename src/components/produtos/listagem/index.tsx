@@ -10,6 +10,7 @@ import { Loader } from "../../common/loader";
 import { useProdutoService } from "../../../app/services/produto.service"
 import { Alert } from "../../common/message"
 import { useState } from "react"
+import Button from "react-bootstrap/esm/Button"
 import { useEffect } from "react"
 export const ListagemProdutos: React.FC = () => {
     const service = useProdutoService();
@@ -41,12 +42,16 @@ export const ListagemProdutos: React.FC = () => {
     //     )
     // }
     return (
+        <div className="Container">
         <Layout titulo="Produtos" mensagem={messages}>
-            <Link href={'/cadastros/produtos'}><button className="button is-warning">Novo</button></Link>
+            <br />
+            <Link href={'/cadastros/produtos'} className="pt-5 m-5"><Button variant="outline-dark">Novo</Button></Link>
+            
             <br />
             <br />
             <Loader show={!result} />
             <TabelaProdutos onEdit={editar} onDelete={deletar} produtos={lista} />
         </Layout>
+        </div>
     )
 }

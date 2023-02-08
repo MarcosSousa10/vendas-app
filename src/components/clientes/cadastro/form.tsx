@@ -47,37 +47,50 @@ export const ClienteForm: React.FC<ClienteFormProps> = ({
     return (
         <form onSubmit={formik.handleSubmit}>
             {formik.values.id &&
-                <div className="columns">
+            <div className="row m-2">
+                <div className="col">
 
                     <Input id="id" name="id" disabled
-                        value={formik.values.id} label="Codigo:" columnClasses="is-half" autoComplete="off" />
+                        value={formik.values.id} label="Codigo:" className="form-control" columnClasses="is-half" autoComplete="off" />
+                    </div>
+                    <div className="col">
                     <Input id="cadastro" name="cadastro" columnClasses="is-half" disabled
-                        value={formik.values.cadastro} label="Data Cadastro " autoComplete="off" 
+                        value={formik.values.cadastro} className="form-control" label="Data Cadastro " autoComplete="off" 
                         />
+                </div>
                 </div>}
-            <div className="columns">
+                <div className="row m-2">
+            <div className="col">
                 <Input id="nome" name="nome" onChange={formik.handleChange}
-                    value={formik.values.nome} label="Nome *" formatter={caixaAlta} columnClasses="is-full" autoComplete="off" 
+                    value={formik.values.nome} label="Nome *" className="form-control" formatter={caixaAlta} columnClasses="is-full" autoComplete="off" 
                     error={formik.errors.nome}/>
             </div>
-            <div className="columns">
+            </div>
+            <div className="row m-2">
+            <div className="col">
                <InputCPF id="cpf" 
                       name="cpf"
                       label="CPF: *"
                       autoComplete="off" 
+                      className="form-control"
                       columnClasses="is-half"
                       onChange={formik.handleChange} 
                       value={formik.values.cpf} 
                       error={formik.errors.cpf}
 
                       />
-                <InputDate id="dataNascimento" name="dataNascimento" columnClasses="is-half" onChange={formik.handleChange}
+                      </div><div className="col">
+                <InputDate id="dataNascimento" name="dataNascimento" className="form-control" columnClasses="is-half" onChange={formik.handleChange}
                     value={formik.values.dataNascimento} label="Data Nascimento *" autoComplete="off" 
-                    error={formik.errors.dataNascimento}/>
+                    error={formik.errors.dataNascimento}/> 
+                    
             </div>
-            <div className="columns">
+            </div>
+            <div className="row m-2">
+            <div className="col">
                <Input id="endereco" 
                       name="endereco"
+                      className="form-control"
                       label="Endereco: *"
                       autoComplete="off" 
                       columnClasses="is-full"
@@ -85,22 +98,28 @@ export const ClienteForm: React.FC<ClienteFormProps> = ({
                       value={formik.values.endereco} 
                       error={formik.errors.endereco}/>
            </div>  
-            <div className="columns">
+           </div>
+           <div className="row m-2">
+            <div className="col">
                 <Input id="email" name="email" onChange={formik.handleChange}
-                    value={formik.values.email} label="Email *" columnClasses="is-half" autoComplete="off" 
+                    value={formik.values.email} label="Email *" columnClasses="is-half" autoComplete="off" className="form-control"
                     error={formik.errors.email}/>
-                <InputTelefone id="telefone" name="telefone" columnClasses="is-half" onChange={formik.handleChange}
+                    </div>
+                    <div className="col">
+                <InputTelefone id="telefone" name="telefone" columnClasses="is-half" onChange={formik.handleChange} className="form-control"
                     value={formik.values.telefone} label="Telefone *" autoComplete="off"
                     error={formik.errors.telefone} />
             </div>
-            <div className="field is-grouped">
+            </div>
+            <br />
+            <div className="d-grid gap-2 d-md-flex justify-content-md-end m-2">
                 <div className="control is-link">
-                <button type="submit" className="button is-success" >
+                <button type="submit" className="btn btn-success me-md-2" >
                     {formik.values.id ? "Atualizar" : "Salvar"}
                 </button>
                 </div>
                 <div className="control">
-                <button type="button" onClick={e=>Router.push("/consultas/clientes")} className="button" >
+                <button type="button" onClick={e=>Router.push("/consultas/clientes")} className="btn btn-primary" >
                     Voltar
                 </button>
                 </div>

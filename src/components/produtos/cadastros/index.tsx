@@ -95,7 +95,8 @@ export const CadastroProdutos: React.FC = () => {
         <Layout titulo="Cadastros de Produtos" mensagem={messages}>
 
             {id &&
-                <div className="columns">
+            <div className="row m-2">
+                <div className="col">
                     <Input label="Codigo: *"
                         columnClasses="is-half"
                         value={id}
@@ -103,15 +104,20 @@ export const CadastroProdutos: React.FC = () => {
                         disabled={true}
 
                     />
+                    </div>
+                    <div className="col">
                     <Input label="Data Cadastro: *"
                         columnClasses="is-half"
                         value={cadastro}
                         id="inputPreco"
                         disabled
                     />
+                </div>
                 </div>}
-            <div className="columns">
+            <div className="row p-2">
+            <div className="col">
                 <Input label="SKU: *"
+                    className="form-control"
                     columnClasses="is-half"
                     onChange={e => setSku(e.target.value)}
                     value={sku}
@@ -119,7 +125,10 @@ export const CadastroProdutos: React.FC = () => {
                     placeholder="Digite o SKU do produto"
                     error={errosr.sku}
                 />
+                </div>
+                <div className="col">
                 <InputMoney label="Preço: *"
+                className="form-control"
                     columnClasses="is-half"
                     onChange={e => setPreco(e.target.value)}
                     value={preco}
@@ -130,8 +139,11 @@ export const CadastroProdutos: React.FC = () => {
                     error={errosr.preco}
                 />
             </div>
-            <div className="columns">
-                <Input label="Nome: *"
+            </div>
+            
+            <div className="row col p-2">
+                <Input label="Nome: * "
+                className="form-control "
                     columnClasses="is-full"
                     onChange={e => setNome(e.target.value)}
                     value={nome}
@@ -140,24 +152,24 @@ export const CadastroProdutos: React.FC = () => {
                     error={errosr.nome}
                 />
             </div>
-            <div className="columns">
-                <div className="field column is-full">
-                    <label className="label" htmlFor="inputDesc">Descrição *</label>
+            <div className="row col p-2">
+                <div className="field column is-full ">
+                    <label className="form-check-label " htmlFor="inputDesc">Descrição *</label>
                     <div className="control">
-                        <textarea value={descricao} onChange={event => setDescricao(event.target.value)} className="textarea" placeholder="Digite o SKU do produto" id="inputDesc" />
+                        <textarea value={descricao} onChange={event => setDescricao(event.target.value)} className="form-control " placeholder="Digite o SKU do produto" id="inputDesc" />
                         {errosr.descricao && <p className="help is-danger">{errosr.descricao}</p>}
                     </div>
                 </div>
             </div>
 
 
-            <div className="field is-grouped ">
+            <div className="d-grid gap-2 d-md-flex justify-content-md-end m-2">
                 <div className="control is-link">
-                    <button className="button is-success" onClick={submit}>
+                    <button className="btn btn-success me-md-2" onClick={submit}>
                         {id ? "Atualizar" : "Salvar"}</button>
                 </div>
                 <div className="control is-link">
-                    <Link href={'/consultas/produtos'}><button className="button">Voltar</button></Link>
+                    <Link href={'/consultas/produtos'}><button className="btn btn-primary">Voltar</button></Link>
                 </div>
             </div>
 

@@ -38,7 +38,7 @@ export const Input: React.FC<InputProps> =({    onChange,formatter, label, colum
 }
 export const InputMoney: React.FC<InputProps> =(props:InputProps)=>{
     return (
-        <Input {...props} formatter={formatReal}/>
+        <Input  {...props} formatter={formatReal}/>
     )
 }
 export const InputCPF: React.FC<InputProps> = (props: InputProps) => {
