@@ -3,14 +3,14 @@ import {Menu} from './menu/index';
 import { Message } from '../common/message';
 import { Alert } from '../common/message';
 interface LayoutProps{
-    titulo?: string;
+    titulo: string;
     children?: ReactNode;
     mensagem?:Array<Alert>;
 
 }
 const Layout: React.FC<LayoutProps>=(props)=>{
 return(
-    <div className="app">
+    <div className="app"  style={{textAlign:"center"}}>
         <section className="main-content columns is-fullheight">
             <Menu/><br />
             <div className="container column is-10">
