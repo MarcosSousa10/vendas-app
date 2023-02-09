@@ -1,6 +1,9 @@
 import { AxiosResponse } from "axios";
 import { httpClient } from "../http";
 import { Venda } from "../models/vendas";
+import { Vendedor } from "../models/vendedor";
+import { Page } from "../models/common";
+import { Cliente } from "../models/clientes";
 const resourceURL = '/api/vendas'
 export const useVendaService=()=>{
 
@@ -17,7 +20,7 @@ export const useVendaService=()=>{
         const bytes = response.data       
         return new Blob([bytes], { type: 'application/pdf' } )
     }
-
+    
     return {
         realizarVenda,
         gerarRelatorioVendas

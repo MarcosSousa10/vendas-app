@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios";
 import { Vendedor } from "../models/vendedor";
 import { httpClient } from "../http";
+import { Page } from "../models/common";
 
 
 
@@ -23,10 +24,22 @@ const deletar= async (id:any):Promise<void>=>{
     const url:string=`${urlvendedor}/${id}`
     await httpClient.delete(url)
 }
+const find = async (
+    nome :string='',
+    cpf: string = '',
+    page:number=0,
+    size:number=5):Promise<Page<Vendedor>>=>{
+        const url =`${urlvendedor}?nome${nome}&cpf=${cpf}&page=${page}&size=${size}` 
+        const response: AxiosResponse<Page<Vendedor>> = await httpClient.get(url);
+        return response.data;
+    }
+    
+
 return{
 salvar,
 carregarVendedor,
-deletar
+deletar,
+find
 }
 
 }

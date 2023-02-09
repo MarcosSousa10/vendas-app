@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
-import { Vendedor } from "../../app/models/vendedor";
-import { useVendaService } from "../../app/services/vendas.service";
-import { useVendedorService } from "../../app/services/vendedor.service";
-import { Alert } from "../common/message";
+import { Vendedor } from "../../../app/models/vendedor";
+import { useVendaService } from "../../../app/services/vendas.service";
+import { useVendedorService } from "../../../app/services/vendedor.service";
+import { Alert } from "../../common/message";
 import { CadastroVendedor } from "./form"
 import {useState, useEffect} from "react";
-import Layout from "../layout";
+import Layout from "../../layout";
 
 export const VendedorTela: React.FC =()=>{
     const [vendedor, setVendedor] = useState<Vendedor>({});

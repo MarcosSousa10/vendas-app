@@ -20,6 +20,7 @@ export const Menu: React.FC = () => {
             <Nav.Link href="#pricing"> <MenuItem href="/vendas/nova-venda" label="Venda" /></Nav.Link>
             <Nav.Link href="#pricing"><MenuItem href="/vendas/relatorio-vendas" label="Relatorio" /></Nav.Link>
             <Nav.Link href="#pricing"><MenuItem href="/vendedores/cadastrovendedor" label="Cadastro De Vendedores" /></Nav.Link>
+            <Nav.Link href="#pricing"><MenuItem href="/vendedoresa/listagem_vendedores" label="Vendedores" /></Nav.Link>
             <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
