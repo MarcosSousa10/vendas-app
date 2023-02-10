@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { Vendedor } from "../../../app/models/vendedor";
-import { useVendaService } from "../../../app/services/vendas.service";
 import { useVendedorService } from "../../../app/services/vendedor.service";
 import { Alert } from "../../common/message";
 import { CadastroVendedor } from "./form"

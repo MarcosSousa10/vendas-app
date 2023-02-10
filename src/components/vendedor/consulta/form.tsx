@@ -2,7 +2,6 @@ import Layout from "../../layout"
 import { Input } from "../../common/input"
 import { InputEmail } from "../../common/input"
 import { InputCPF, InputTelefone } from "../../common/input"
-import Button from "react-bootstrap/esm/Button"
 import { Vendedor } from "../../../app/models/vendedor"
 import { useFormik } from "formik"
 import Router from "next/router"
@@ -47,7 +46,7 @@ export const CadastroVendedor: React.FC<CadastroVendedorProps> = ({
                         <InputTelefone label="Telefone" value={formik.values.telefone} onChange={formik.handleChange} className="form-control" name="telefone" id="telefone" />
                     </div>
                 </div>
-                <Button type="submit" onClick={e=>Router.push("/vendedoresa/listagem_vendedores")} className="btn btn-center">Cadastrar</Button>
+                <button type="submit" onClick={e=>Router.push("/vendedoresa/listagem_vendedores")} className="btn btn-center">Cadastrar</button>
            
         </form>
     )

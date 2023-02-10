@@ -15,12 +15,12 @@ export const Menu: React.FC = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/consultas/produtos"><MenuItem href="/consultas/produtos" label="Produtos" /></Nav.Link>
-            <Nav.Link href="#pricing"><MenuItem href="/consultas/clientes" label="Clientes" /></Nav.Link>
-            <Nav.Link href="#pricing"> <MenuItem href="/vendas/nova-venda" label="Venda" /></Nav.Link>
-            <Nav.Link href="#pricing"><MenuItem href="/vendas/relatorio-vendas" label="Relatorio" /></Nav.Link>
-            <Nav.Link href="#pricing"><MenuItem href="/vendedores/cadastrovendedor" label="Cadastro De Vendedores" /></Nav.Link>
-            <Nav.Link href="#pricing"><MenuItem href="/vendedoresa/listagem_vendedores" label="Vendedores" /></Nav.Link>
+            <Nav.Link ><MenuItem href="/consultas/produtos" label="Produtos" /></Nav.Link>
+            <Nav.Link ><MenuItem href="/consultas/clientes" label="Clientes" /></Nav.Link>
+            <Nav.Link > <MenuItem href="/vendas/nova-venda" label="Venda" /></Nav.Link>
+            <Nav.Link><MenuItem href="/vendas/relatorio-vendas" label="Relatorio" /></Nav.Link>
+            <Nav.Link><MenuItem href="/vendas/vendedores" label="Cadastro De Vendedores" /></Nav.Link>
+            <Nav.Link ><MenuItem href="/vendedoresa/listagem_vendedores" label="Vendedores" /></Nav.Link>
             <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
