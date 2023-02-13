@@ -53,7 +53,7 @@ export const RotaAutenticada: React.FC<RotaAutenticadaProps> = ({
 
 
                 <Card.Text style={{ textAlign: "center", fontFamily: 'fantasy' }}>
-                  Faça o Login ultilizando Uma Das Redes Sociais
+                  Faça o Login Ultilizando Uma Das Redes Sociais
                   <br />
 
                 </Card.Text>
