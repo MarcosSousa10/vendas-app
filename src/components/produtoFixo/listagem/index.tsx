@@ -28,6 +28,7 @@ export const ListagemProdutos: React.FC = () => {
         const url = `/cadastros/produtoFixo?id=${produto.id}`
         Router.push(url)
     }
+    
     const deletar = (produto: ProdutoFixo) => {
         service.deletar(produto.id).then(response => {
             setMessages([
