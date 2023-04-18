@@ -1,4 +1,3 @@
-import { Produto } from "../../../../app/models/produtos"
 import { useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
@@ -6,8 +5,9 @@ import { Button } from "primereact/button";
 import  Router  from "next/router";
 import { Cliente } from "../../../../app/models/clientes";
 import { confirmDialog } from "primereact/confirmdialog";
+import { ProdutoFixo } from "../../../../app/models/produtoFixo";
 interface TabelaProdutosProps{
-    produtos:Array<Produto>;
+    produtos:Array<ProdutoFixo>;
     onEdit:(produto:any)=>void;
     onDelete:(produto:any)=>void;
 }
@@ -16,8 +16,8 @@ export const TabelaProdutos:React.FC<TabelaProdutosProps> = ({
     onEdit,
     onDelete
 })=>{
-    const actionTemplate = (registro: Produto) => {
-        const url = `/cadastros/produtos?id=${registro.id}`
+    const actionTemplate = (registro: ProdutoFixo) => {
+        const url = `/cadastros/produtofixo?id=${registro.id}`
         return (
             <div>
                 <Button label="Editar" 
@@ -25,7 +25,7 @@ export const TabelaProdutos:React.FC<TabelaProdutosProps> = ({
                      //   onClick={e => Router.push(url) }
                         onClick={e => onEdit(registro) }
                         />
-                <Button label="Deletar" onClick={event => {
+                 <Button label="Deletar" onClick={event => {
                     // confirmDialog({
                     //     message: "Confirma a exclusão deste registro?",
                     //     acceptLabel: "Sim",
