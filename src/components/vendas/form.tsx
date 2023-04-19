@@ -20,6 +20,7 @@ import { Column } from "primereact/column";
 import { number } from "yup";
 import { FormatUtils } from "@4us-dev/utils";
 import { validationSchema } from "./validationSchema";
+import axios from "axios";
 
 const formatadorMoney = new Intl.NumberFormat('pt-br', {
     style: 'currency',
@@ -135,6 +136,7 @@ export const VendasForm: React.FC<VendasFormProps> = ({
     const disableAddProdutoButton = () => {
         return !produto || !quantidadeProduto
     }
+  
     const totalVenda = () => {
         const totais:any = formik.values.itens?.map(iv => iv.quantidade * iv.produto?.preco);
         if (totais?.length) {
@@ -143,6 +145,7 @@ export const VendasForm: React.FC<VendasFormProps> = ({
             return 0;
         }
     }
+
     const realizarNovaVenda = () => {
         onNovaVenda();
         formik.resetForm();
