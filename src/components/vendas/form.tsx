@@ -106,7 +106,8 @@ export const VendasForm: React.FC<VendasFormProps> = ({
         setCodigoProduto('');
         setQuantidadeProduto(0);
         const total = totalVenda();
-        const lucro = totalVendaLucro();
+        const bruto = totalVendaLucro();
+        const lucro = bruto - total;
         formik.setFieldValue("total", total)
         formik.setFieldValue("lucro", lucro)
     }
