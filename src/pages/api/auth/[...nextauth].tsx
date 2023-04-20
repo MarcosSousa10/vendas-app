@@ -41,7 +41,7 @@ providers: [
       password: { label: "Password", type: "password" }
     },
     async authorize(credentials, req) {
-      //  const res = await fetch("/api/clientes", {
+      //  const res = await fetch("/api/login", {
       //    method: 'GET',
       //  body: JSON.stringify(credentials),
       //    headers: { "Content-Type": "application/json" }
