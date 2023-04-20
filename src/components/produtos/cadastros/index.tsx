@@ -25,11 +25,13 @@ interface FormErros {
     nome?: string;
     preco?: string;
     descricao?: string;
+    custo?:string;
 }
 export const CadastroProdutos: React.FC = () => {
     const service = useProdutoService();
     const [sku, setSku] = useState<string>('');
     const [preco, setPreco] = useState<string>('');
+    const [custo, setCusto] = useState<string>('');
     const [nome, setNome] = useState<string>('');
     const [descricao, setDescricao] = useState<string>('');
     const [id, setId] = useState<string>();
@@ -46,6 +48,7 @@ export const CadastroProdutos: React.FC = () => {
                 setNome(produtoEncontrado.nome || '')
                 setDescricao(produtoEncontrado.descricao || '')
                 setPreco(formatReal(`${produtoEncontrado.preco}`) || '')
+                setCusto(formatReal(`${produtoEncontrado.custo}`) || '')
                 setCadastro(produtoEncontrado.cadastro || "")
             })
 
@@ -56,6 +59,7 @@ export const CadastroProdutos: React.FC = () => {
             id,
             sku: sku,
             preco: converterEmBigDecimal(preco),
+            custo: converterEmBigDecimal(custo),
             nome: nome,
             descricao: descricao
         }
@@ -137,6 +141,19 @@ export const CadastroProdutos: React.FC = () => {
                     currency
                     maxLength={10}
                     error={errosr.preco}
+                />
+            </div>
+            <div className="col">
+                <InputMoney label="Custo: *"
+                className="form-control"
+                    columnClasses="is-half"
+                    onChange={e => setCusto(e.target.value)}
+                    value={custo}
+                    id="inputPreco"
+                    placeholder="Digite o Preço de custo do produto"
+                    currency
+                    maxLength={10}
+                    error={errosr.custo}
                 />
             </div>
             </div>

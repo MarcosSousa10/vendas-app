@@ -36,6 +36,7 @@ const formScheme: Venda = {
     cliente: null!,
     itens: [],
     total: 0,
+    lucro: 0,
     formaPagamento: ''
 }
 export const VendasForm: React.FC<VendasFormProps> = ({
@@ -105,7 +106,9 @@ export const VendasForm: React.FC<VendasFormProps> = ({
         setCodigoProduto('');
         setQuantidadeProduto(0);
         const total = totalVenda();
+        const lucro = totalVendaLucro();
         formik.setFieldValue("total", total)
+        formik.setFieldValue("lucro", lucro)
     }
     const dialogMensagemFooter = () => {
         return (
@@ -139,6 +142,14 @@ export const VendasForm: React.FC<VendasFormProps> = ({
   
     const totalVenda = () => {
         const totais:any = formik.values.itens?.map(iv => iv.quantidade * iv.produto?.preco);
+        if (totais?.length) {
+            return totais.reduce((somatoriaAtual = 0, valorItemAtual:number) => somatoriaAtual + valorItemAtual);
+        } else {
+            return 0;
+        }
+    }
+    const totalVendaLucro = () => {
+        const totais:any = formik.values.itens?.map(iv => iv.quantidade * iv.produto?.custo);
         if (totais?.length) {
             return totais.reduce((somatoriaAtual = 0, valorItemAtual:number) => somatoriaAtual + valorItemAtual);
         } else {
@@ -236,6 +247,12 @@ export const VendasForm: React.FC<VendasFormProps> = ({
                         <div className="p-field">
                             <label htmlFor="total">Total: </label>
                             <InputText disabled value={formatadorMoney.format(formik.values.total)} />
+                        </div>
+                    </div>
+                    <div className="p-col-2">
+                        <div className="p-field">
+                            <label htmlFor="lucro">Lucro: </label>
+                            <InputText disabled value={formatadorMoney.format(formik.values.lucro)} />
                         </div>
                     </div>
                 </div>

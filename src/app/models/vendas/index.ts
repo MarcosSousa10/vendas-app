@@ -6,6 +6,7 @@ export interface Venda {
     itens?: Array<ItemVenda>;
     formaPagamento?: string;
     total: number;
+    lucro: number;
 }
 export interface ItemVenda {
     produto: Produto;

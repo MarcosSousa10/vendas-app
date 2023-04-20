@@ -1,4 +1,5 @@
 export interface Produto{
+    custo?: any;
     id?: string;
     nome?: string;
     descricao?: string;
