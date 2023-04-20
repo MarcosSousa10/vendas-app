@@ -48,9 +48,14 @@ providers: [
       //  })
 
       //  const user = await res.json()
-        
-       const user = { id: "1", name: "J Smith", email: "jsmith@example.com" }
-       console.log(user)
+      let user=null;
+        if(credentials?.username === "administrador" && credentials.password === "admin"){
+          user = { id: "1", name: "Administrador", email: "administrador@gmail.com" }
+        }else{
+          user = null;
+        }
+       
+       
       if (user) {
         // Any object returned will be saved in `user` property of the JWT
         return user
