@@ -1,11 +1,11 @@
 import { ItemVenda, Venda } from "../../app/models/vendas";
-import { useFormik } from "formik";
+import { Form, useFormik } from "formik";
 import {
     AutoComplete,
     AutoCompleteChangeParams,
     AutoCompleteCompleteMethodParams
 } from 'primereact/autocomplete';
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { Page } from "../../app/models/common";
 import { Cliente } from "../../app/models/clientes";
 import { useClienteService } from "../../app/services/cliente.service";
@@ -32,6 +32,9 @@ interface VendasFormProps {
     onNovaVenda: () => void;
     vendaRealizada: boolean;
 }
+interface DiscountFormProps {
+    onApplyDiscount: (discountPercentage: number) => void;
+}
 const formScheme: Venda = {
     cliente: null!,
     itens: [],
@@ -53,6 +56,8 @@ export const VendasForm: React.FC<VendasFormProps> = ({
     const [quantidadeProduto, setQuantidadeProduto] = useState<number>(0)
     const [codigoProduto, setCodigoProduto] = useState<string>('');
     const [produto, setProduto] = useState<Produto>(null!);
+    const [totais, setTotais] = useState(0);
+
     const [listaClientes, setListaClientes] = useState<Page<Cliente>>({
         content: [],
         first: 0,
@@ -106,14 +111,22 @@ export const VendasForm: React.FC<VendasFormProps> = ({
         setCodigoProduto('');
         setQuantidadeProduto(0);
         const total = totalVenda();
+       
+      
         const bruto = totalVendaLucro();
-        const lucro =  total - bruto;
+        let lucro= 0;
+        lucro = total - bruto;  
+        
+        
+        
+
+      
         formik.setFieldValue("total", total)
         formik.setFieldValue("lucro", lucro)
     }
     const dialogMensagemFooter = () => {
         return (
-            
+
             <div>
                 <Button label="Ok" onClick={handleFecharProdutoNaoEncontrado} />
             </div>
@@ -140,23 +153,61 @@ export const VendasForm: React.FC<VendasFormProps> = ({
     const disableAddProdutoButton = () => {
         return !produto || !quantidadeProduto
     }
-  
+    const [discountPercentage, setDiscountPercentage] = useState(0);
+    const handleDiscountChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const newDiscount = parseInt(event.target.value);
+        setDiscountPercentage(newDiscount);
+    };
+    
     const totalVenda = () => {
-        const totais:any = formik.values.itens?.map(iv => iv.quantidade * iv.produto?.preco);
+
+        const totais: any = formik.values.itens?.map(iv => iv.quantidade * iv.produto?.preco);
         if (totais?.length) {
-            return totais.reduce((somatoriaAtual = 0, valorItemAtual:number) => somatoriaAtual + valorItemAtual);
+            
+            let b =  totais.reduce((somatoriaAtual = 0, valorItemAtual: number) => somatoriaAtual + valorItemAtual);
+            return b - handleApplyDiscount();
+            
+        } else {
+            return 0;
+        }
+    }
+    const totalVendas = () => {
+
+        const totais: any = formik.values.itens?.map(iv => iv.quantidade * iv.produto?.preco);
+        if (totais?.length) {
+            return totais.reduce((somatoriaAtual = 0, valorItemAtual: number) => somatoriaAtual + valorItemAtual );
+            
+        } else {
+            return 0;
+        }
+    }
+    const TotalDesconto = () => {
+        const totais: any = formik.values.itens?.map(iv => iv.quantidade * iv.produto?.preco);
+        if (totais?.length) {
+            return totais.reduce((somatoriaAtual = 0, valorItemAtual: number) => somatoriaAtual + valorItemAtual);
         } else {
             return 0;
         }
     }
     const totalVendaLucro = () => {
-        const totais:any = formik.values.itens?.map(iv => iv.quantidade * iv.produto?.custo);
+        const totais: any = formik.values.itens?.map(iv => iv.quantidade * iv.produto?.custo);
         if (totais?.length) {
-            return totais.reduce((somatoriaAtual = 0, valorItemAtual:number) => somatoriaAtual + valorItemAtual);
+            return totais.reduce((somatoriaAtual = 0, valorItemAtual: number) => somatoriaAtual + valorItemAtual);
         } else {
             return 0;
         }
     }
+
+  
+    const handleApplyDiscount = () => {
+        const a = totalVendas()
+        
+        const calculated = a * discountPercentage;
+       const calculatedPercentage:number = calculated / 100;
+       return calculatedPercentage ;
+       
+    };
+
 
     const realizarNovaVenda = () => {
         onNovaVenda();
@@ -166,116 +217,130 @@ export const VendasForm: React.FC<VendasFormProps> = ({
     }
     return (
         <div className="container">
-        <form onSubmit={formik.handleSubmit}>
-            <div className="p-fluid">
-                <div className="p-field">
-                    <label htmlFor="cliente">Cliente: *</label>
-                    <AutoComplete value={formik.values.cliente}
-                        onChange={handleClienteChange} field="nome" suggestions={listaClientes.content}
-                        completeMethod={handleClienteAutoComplete} id="cliente" name="cliente" />
-                    <small className="p-error p-d-block"> {formik.errors.cliente}</small>
+            <form onSubmit={formik.handleSubmit}>
+                <div className="p-fluid">
+                    <div className="p-field">
+                        <label htmlFor="cliente">Cliente: *</label>
+                        <AutoComplete value={formik.values.cliente}
+                            onChange={handleClienteChange} field="nome" suggestions={listaClientes.content}
+                            completeMethod={handleClienteAutoComplete} id="cliente" name="cliente" />
+                        <small className="p-error p-d-block"> {formik.errors.cliente}</small>
+                    </div>
+                    <div className="p-grid">
+                        <div className="p-col-2">
+                            <span className="p-float-label">
+                                <InputText onBlur={handleCodigoProdutoSelect} id="codigoProduto" value={codigoProduto} onChange={e => setCodigoProduto(e.target.value)} />
+                                <label htmlFor="codigoProduto">Codigo</label>
+                            </span>
+                        </div>
+                        <div className="p-col-6">
+                            <span className="p-float-label">
+                                <AutoComplete value={produto} completeMethod={handleProdutoAutoComplete} id="produto" name="produto"
+                                    onChange={e => setProduto(e.value)} suggestions={listaFiltradaProdutos} field="nome" />
+                            </span>
+                        </div>
+                        <div className="p-col-2">
+                            <span className="p-float-label">
+                                <InputText id="qtdProduto" value={quantidadeProduto}
+                                    onChange={e => setQuantidadeProduto(parseInt(e.target.value))} />
+                                <label htmlFor="qtdProduto">QTD</label>
+                            </span>
+                        </div>
+                        <div className="p-col-2">
+                            <Button label="adicionar"
+                                disabled={disableAddProdutoButton()} type="button" onClick={handleAddProduto} />
+                        </div>
+                        <div className="p-col-12">
+                            <DataTable value={formik.values.itens} emptyMessage="Nenhum Produto Adicionando">
+                                <Column body={(item: ItemVenda) => {
+                                    const handleRemoverItem = () => {
+                                        const novaLista = formik.values.itens?.filter(iv => iv.produto?.id !== item.produto?.id)
+                                        formik.setFieldValue("itens", novaLista)
+                                    }
+                                    return (
+                                        <Button label="Excluir" type="button" onClick={handleRemoverItem} />
+                                    )
+                                }} />
+                                <Column field="produto.id" header="Código" />
+                                <Column field="produto.sku" header="SKU" />
+                                <Column field="produto.nome" header="Produto" />
+                                <Column field="produto.preco" header="Preço Unitário" />
+                                <Column field="quantidade" header="QTD" />
+                                <Column header="Total" body={(iv: ItemVenda) => {
+                                    const total = iv.produto?.preco! * iv.quantidade!
+                                    const totalFormatado = formatadorMoney.format(total)
+                                    return (
+                                        <div>
+                                            {totalFormatado}
+                                        </div>
+                                    )
+                                }} />
+                            </DataTable>
+                            <small className="p-error p-d-block"> {formik.touched && formik.errors.itens}</small>
+
+                        </div>
+
+                        <div className="p-col-3">
+                            <div className="p-field">
+                                <label htmlFor="formaPagamento">Forma de pagamento: *</label>
+                                <Dropdown id="formaPagamento" options={formaPagamento} value={formik.values.formaPagamento} onChange={e => formik.setFieldValue("formaPagamento", e.value)}
+                                    placeholder="Selecione..." />
+                                <small className="p-error p-d-block"> {formik.touched && formik.errors.formaPagamento}</small>
+
+                            </div>
+                        </div>
+                        <div className="p-col-2">
+                            <div className="p-field">
+                                <label htmlFor="itens">Itens: </label>
+                                <InputText disabled value={formik.values.itens?.length} />
+                            </div>
+                        </div>
+                        <div className="p-col-2">
+                            <div className="p-field">
+                                <label htmlFor="itens">Desconto: </label>
+                                
+                                        <InputText
+                                            type="number"
+                                            value={discountPercentage}
+                                            onChange={handleDiscountChange}
+                                        />
+                                    <Button onClick={handleApplyDiscount}>Aplicar desconto</Button>
+                                
+
+                            </div>
+                        </div>
+                        <div className="p-col-2">
+                            <div className="p-field">
+                                <label htmlFor="total">Total: </label>
+                                <InputText disabled value={formatadorMoney.format(formik.values.total)} />
+                            </div>
+                        </div>
+                        <div className="p-col-2">
+                            <div className="p-field">
+                                <label htmlFor="lucro">Lucro: </label>
+                                <InputText disabled value={formatadorMoney.format(formik.values.lucro)} />
+                            </div>
+                        </div>
+                    </div>
+                    {!vendaRealizada &&
+                        <Button type="submit" label="Finalizar" />
+                    }
+                    {
+                        vendaRealizada &&
+                        <Button type="button" onClick={realizarNovaVenda} label="Nova Venda" className="p-button-success" />
+                    }
+
                 </div>
-                <div className="p-grid">
-                    <div className="p-col-2">
-                        <span className="p-float-label">
-                            <InputText onBlur={handleCodigoProdutoSelect} id="codigoProduto" value={codigoProduto} onChange={e => setCodigoProduto(e.target.value)} />
-                            <label htmlFor="codigoProduto">Codigo</label>
-                        </span>
-                    </div>
-                    <div className="p-col-6">
-                        <span className="p-float-label">
-                            <AutoComplete value={produto} completeMethod={handleProdutoAutoComplete} id="produto" name="produto"
-                                onChange={e => setProduto(e.value)} suggestions={listaFiltradaProdutos} field="nome" />
-                        </span>
-                    </div>
-                    <div className="p-col-2">
-                        <span className="p-float-label">
-                            <InputText id="qtdProduto" value={quantidadeProduto}
-                                onChange={e => setQuantidadeProduto(parseInt(e.target.value))} />
-                            <label htmlFor="qtdProduto">QTD</label>
-                        </span>
-                    </div>
-                    <div className="p-col-2">
-                        <Button label="adicionar"
-                            disabled={disableAddProdutoButton()} type="button" onClick={handleAddProduto} />
-                    </div>
-                    <div className="p-col-12">
-                        <DataTable  value={formik.values.itens} emptyMessage="Nenhum Produto Adicionando">
-                            <Column body={(item: ItemVenda) => {
-                                const handleRemoverItem = () => {
-                                    const novaLista = formik.values.itens?.filter(iv => iv.produto?.id !== item.produto?.id)
-                                    formik.setFieldValue("itens", novaLista)
-                                }
-                                return (
-                                    <Button label="Excluir" type="button" onClick={handleRemoverItem} />
-                                )
-                            }} />
-                            <Column field="produto.id" header="Código" />
-                            <Column field="produto.sku" header="SKU" />
-                            <Column field="produto.nome" header="Produto" />
-                            <Column field="produto.preco" header="Preço Unitário" />
-                            <Column field="quantidade" header="QTD" />
-                            <Column header="Total" body={(iv: ItemVenda) => {
-                                const total = iv.produto?.preco! * iv.quantidade!
-                                const totalFormatado = formatadorMoney.format(total)
-                                return (
-                                    <div>
-                                        {totalFormatado}
-                                    </div>
-                                )
-                            }} />
-                        </DataTable>
-                        <small className="p-error p-d-block"> {formik.touched && formik.errors.itens}</small>
+                <Dialog header="Atenção!"
+                    position="top" visible={!!mensagem}
+                    onHide={handleFecharProdutoNaoEncontrado}
+                    footer={dialogMensagemFooter}>
+                    {mensagem}
 
-                    </div>
-
-                    <div className="p-col-5">
-                        <div className="p-field">
-                            <label htmlFor="formaPagamento">Forma de pagamento: *</label>
-                            <Dropdown id="formaPagamento" options={formaPagamento} value={formik.values.formaPagamento} onChange={e => formik.setFieldValue("formaPagamento", e.value)}
-                                placeholder="Selecione..." />
-                            <small className="p-error p-d-block"> {formik.touched && formik.errors.formaPagamento}</small>
-
-                        </div>
-                    </div>
-                    <div className="p-col-2">
-                        <div className="p-field">
-                            <label htmlFor="itens">Itens: </label>
-                            <InputText disabled value={formik.values.itens?.length} />
-                        </div>
-                    </div>
-                    <div className="p-col-2">
-                        <div className="p-field">
-                            <label htmlFor="total">Total: </label>
-                            <InputText disabled value={formatadorMoney.format(formik.values.total)} />
-                        </div>
-                    </div>
-                    <div className="p-col-2">
-                        <div className="p-field">
-                            <label htmlFor="lucro">Lucro: </label>
-                            <InputText disabled value={formatadorMoney.format(formik.values.lucro)} />
-                        </div>
-                    </div>
-                </div>
-                {!vendaRealizada &&
-                    <Button type="submit" label="Finalizar" />
-                }
-                {
-                    vendaRealizada &&
-                    <Button type="button" onClick={realizarNovaVenda} label="Nova Venda" className="p-button-success" />
-                }
-
-            </div>
-            <Dialog header="Atenção!"
-                position="top" visible={!!mensagem}
-                onHide={handleFecharProdutoNaoEncontrado}
-                footer={dialogMensagemFooter}>
-                {mensagem}
-
-            </Dialog>
+                </Dialog>
 
 
-        </form>
+            </form>
         </div>
     )
 }
