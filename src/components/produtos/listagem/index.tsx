@@ -10,7 +10,7 @@ import { Loader } from "../../common/loader";
 import { useProdutoService } from "../../../app/services/produto.service"
 import { Alert } from "../../common/message"
 import { useState } from "react"
-import Button from "react-bootstrap/esm/Button"
+import Button from "react-bootstrap/Button"
 import { useEffect } from "react"
 export const ListagemProdutos: React.FC = () => {
     const service = useProdutoService();
