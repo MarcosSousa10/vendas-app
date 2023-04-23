@@ -16,7 +16,8 @@ export default NextAuth({
       ],
       callbacks: {
       },
-      secret: process.env.NEXTAUTH_SECRET,    
+      // secret: process.env.NEXTAUTH_SECRET,    
+      secret: process.env.JWT_SECRET
     }
  )
 //  OpenSSL> rand -base64 32
