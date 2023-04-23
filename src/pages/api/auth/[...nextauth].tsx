@@ -14,7 +14,7 @@ export default NextAuth({
           clientSecret: process.env.GITHUB_SECRET
         }),
       ],   
-      secret: process.env.SECRET,
+      secret: 'fadfadasdpiasjdsad524ad534a45d34a35d4a65d4a56s4da54d6a84sd658a4sd6584asd',
     }
  )
 //  OpenSSL> rand -base64 32
