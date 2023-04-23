@@ -14,10 +14,7 @@ export default NextAuth({
           clientSecret: process.env.GITHUB_SECRET
         })
       ],
-      secret: process.env.NEXT_PUBLIC_SECRET,
-      pages: {
-        signIn: '/auth/signin',
-      }
+      secret: process.env.NEXT_PUBLIC_SECRET
     
     }
  )
