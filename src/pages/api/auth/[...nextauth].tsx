@@ -19,3 +19,8 @@ export default NextAuth({
       secret: process.env.NEXTAUTH_SECRET,    
     }
  )
+//  OpenSSL> rand -base64 32
+//  JDOmgILh7gjlgfqdSsnbxMSeUajHURv1S8IjwC4CauU=
+//  unable to write 'random state'
+//  OpenSSL>
+ 
