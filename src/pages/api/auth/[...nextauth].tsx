@@ -12,12 +12,9 @@ export default NextAuth({
         GitHubProvider({
           clientId: process.env.GITHUB_ID,
           clientSecret: process.env.GITHUB_SECRET
-        })
-      ],
-      callbacks: {
-      },
-      // secret: process.env.NEXTAUTH_SECRET,    
-      secret: process.env.JWT_SECRET
+        }),
+      ],   
+      secret: process.env.SECRET,
     }
  )
 //  OpenSSL> rand -base64 32
