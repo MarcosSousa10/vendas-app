@@ -9,7 +9,7 @@ export const Menu: React.FC = () => {
     return (
         <Navbar  className="column is-2 is-narrow-mobile s-fullheight section is-hidden-mobile" collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="/">Supremo gas</Navbar.Brand>
+        <Navbar.Brand href="/">Supremo Gas</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
