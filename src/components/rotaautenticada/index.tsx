@@ -29,8 +29,9 @@ export const RotaAutenticada: React.FC<RotaAutenticadaProps> = ({
     )
   }
   return (
+    <div style={{backgroundColor:'black'}}>
     <div className="container " >
-      <Card style={{ minWidth: '100%', minHeight: '100vh', display: "flex" ,}}>
+      <Card style={{ minWidth: '100%', minHeight: '100vh', display: "flex" ,backgroundColor:'#77DD77'}}>
         <div style={{ alignItems: "center", textAlign: "center" }}>
           {/* <Card.Img variant="top" src="https://scontent.frao1-1.fna.fbcdn.net/v/t1.6435-9/120018403_106733417854100_4086658827985042327_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=174925&_nc_ohc=ipqO4JZ5X04AX_M79zu&_nc_oc=AQlcx5pruxX92UGZyGoYljfN3UZxnGR9Ajx5K7f1nRJOUo-NyF71tpIYRfV5RLrR4so&_nc_ht=scontent.frao1-1.fna&oh=00_AfDMr8XuZb3xgU6Q5HK2DuRPkmMiaVKv2aHp1RyBYoj-0g&oe=646E09BB" style={{ width: '400px', }}  ></Card.Img> */}
           <Image src={img} alt={""} />
@@ -69,6 +70,7 @@ export const RotaAutenticada: React.FC<RotaAutenticadaProps> = ({
 
         </div>
       </Card>
+    </div>
     </div>
   )
 }
