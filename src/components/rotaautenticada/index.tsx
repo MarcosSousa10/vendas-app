@@ -64,7 +64,7 @@ export const RotaAutenticada: React.FC<RotaAutenticadaProps> = ({
                           spin
                         />
                       </span>
-                        <span>Supremo Gas</span></Button></div>
+                        <span>Login</span></Button></div>
                     </div>
 
                     <div className="col">
