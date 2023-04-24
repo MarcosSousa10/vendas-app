@@ -1,6 +1,6 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
- import GitHubProvider from "next-auth/providers/github";
+//  import GitHubProvider from "next-auth/providers/github";
 export const authOptions = {
 
 }
@@ -9,21 +9,37 @@ export default NextAuth({
      
    
       providers: [
-        GitHubProvider({
-          clientId: process.env.GITHUB_ID ?? "",
-          clientSecret: process.env.GITHUB_SECRET ?? ""
-        }),
+        // GitHubProvider({
+        //   clientId: process.env.GITHUB_ID ?? "",
+        //   clientSecret: process.env.GITHUB_SECRET ?? ""
+        // }),
         CredentialsProvider({
           name:"NextAuthCredentials",
-          credentials:{},
-           async authorize(credentials) {
-               console.log(credentials)
-               return{
-                   id: "1",
-                   name:"marcos",
-                   email:"marcospegodesousa10@gmail.com",
-                   image:"gsds"
-               };
+          credentials:{
+            username: { label: "Username", type: "text", placeholder: "jsmith" },
+            password: { label: "Password", type: "password" }
+          },
+          async authorize(credentials, req) {
+              const res = await fetch("/api/login", {
+                method: 'GET',
+              body: JSON.stringify(credentials),
+                headers: { "Content-Type": "application/json" }
+              })
+
+            const user = { id: "1", name: "administrador", email: "administrador@gmail.com" }
+            // const user = await res.json()
+            if (user) {
+              // Any object returned will be saved in `user` property of the JWT
+              return user
+            } else {
+              // If you return null then an error will be displayed advising the user to check their details.
+              return null
+            // return{
+            //        id: "1",
+            //        name:"marcos",
+            //        email:"marcospegodesousa10@gmail.com",
+            //        image:"gsds"
+                };
               },
             })
           ],
