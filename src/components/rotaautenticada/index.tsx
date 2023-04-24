@@ -3,6 +3,11 @@ import Icon from '@mdi/react';
 import { mdiAccount } from '@mdi/js';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Image from 'next/image'
+import Image2 from 'next/image'
+import img from '../../imagens/imagem.png';
+
+
 import { InputCPF, InputEmail, Input, InputTelefone } from "../common/input";
 interface RotaAutenticadaProps {
   children: React.ReactNode;
@@ -24,36 +29,24 @@ export const RotaAutenticada: React.FC<RotaAutenticadaProps> = ({
     )
   }
   return (
-    <div className="container" >
-      <Card style={{ minWidth: '100%', minHeight: '100vh', display: "flex" }}>
+    <div className="container " >
+      <Card style={{ minWidth: '100%', minHeight: '100vh', display: "flex" ,}}>
         <div style={{ alignItems: "center", textAlign: "center" }}>
-          <Card.Img variant="top" src="../../imagens/Capturar-removebg-preview.png" style={{ width: '400px', }} ></Card.Img>
-          <Card.Title><h5 style={{ fontWeight: 'bold', fontSize: "50px", fontFamily: "sans-serif" }}>Supremo Gas</h5></Card.Title>
+          {/* <Card.Img variant="top" src="https://scontent.frao1-1.fna.fbcdn.net/v/t1.6435-9/120018403_106733417854100_4086658827985042327_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=174925&_nc_ohc=ipqO4JZ5X04AX_M79zu&_nc_oc=AQlcx5pruxX92UGZyGoYljfN3UZxnGR9Ajx5K7f1nRJOUo-NyF71tpIYRfV5RLrR4so&_nc_ht=scontent.frao1-1.fna&oh=00_AfDMr8XuZb3xgU6Q5HK2DuRPkmMiaVKv2aHp1RyBYoj-0g&oe=646E09BB" style={{ width: '400px', }}  ></Card.Img> */}
+          <Image src={img} alt={""} />
+
+          {/* <Card.Title><h5 style={{ fontWeight: 'bold', fontSize: "50px", fontFamily: "sans-serif" }}>Supremo Gas</h5></Card.Title> */}
         </div>
 
         <div className="row">
           <div className="col">
             <div className="car m-5">
 
-
-
-
               <Card.Body >
-
-
-                <Card.Text style={{ textAlign: "center", fontFamily: 'fantasy' }}>
-                  Faça o Login Ultilizando Uma Das Redes Sociais
-                  <br />
-
-                </Card.Text>
-
-
-                <InputEmail id="email" name="email" label="Email" className='form-control' />
-                <Input type="password" id="senha" name="senha" label="Senha" className='form-control' />
                 <div className="container">
                   <div className="row mt-5">
                     <div className="col">
-                      <div style={{ textAlign: "center" }} ><Button className="button is-large" onClick={() => signIn()}>  <span className="icon is-medium">
+                      <div style={{ textAlign: "center" }} ><Button className="button is-large" onClick={() => signIn()} style={{height:'50px' , width:'200px'}}>  <span className="icon is-medium">
                         <Icon path={mdiAccount}
                           title="User Profile"
                           size={1}
@@ -65,10 +58,6 @@ export const RotaAutenticada: React.FC<RotaAutenticadaProps> = ({
                         />
                       </span>
                         <span>Login</span></Button></div>
-                    </div>
-
-                    <div className="col">
-                      <div style={{ textAlign: "center" }} ><Button > <span>Login</span> </Button></div>
                     </div>
                   </div>
                 </div>
