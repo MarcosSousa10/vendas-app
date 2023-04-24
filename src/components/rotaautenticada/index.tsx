@@ -27,22 +27,11 @@ export const RotaAutenticada: React.FC<RotaAutenticadaProps> = ({
     <div className="container" >
       <Card style={{ minWidth: '100%', minHeight: '100vh', display: "flex" }}>
         <div style={{ alignItems: "center", textAlign: "center" }}>
-          <Card.Img variant="top" src="https://ps.w.org/login-customizer/assets/icon-256x256.png?rev=2455454" style={{ width: '400px', }} ></Card.Img>
-          <Card.Title><h5 style={{ fontWeight: 'bold', fontSize: "50px", fontFamily: "sans-serif" }}>Login</h5></Card.Title>
+          <Card.Img variant="top" src="../../imagens/Capturar-removebg-preview.png" style={{ width: '400px', }} ></Card.Img>
+          <Card.Title><h5 style={{ fontWeight: 'bold', fontSize: "50px", fontFamily: "sans-serif" }}>Supremo Gas</h5></Card.Title>
         </div>
 
         <div className="row">
-          <div className="col" >
-            <form action="" className="m-5" style={{ display: "block", alignItems: "center", justifyContent: "center" }}>
-              <InputCPF id="cpf" name="cpf" label="CPF" className='form-control' />
-              <InputEmail id="email" name="email" label="Email" className='form-control' />
-              <Input id="nome" name="nome" label="Nome" className='form-control' />
-              <Input type="password" id="senha" name="senha" label="Senha" className='form-control' />
-              <InputTelefone id="telefone" name="telefone" label="Telefone" className='form-control' />
-              <div style={{ textAlign: "center" }} className="m-5"><Button >Cadastrar</Button></div>
-
-            </form>
-          </div>
           <div className="col">
             <div className="car m-5">
 
@@ -75,7 +64,7 @@ export const RotaAutenticada: React.FC<RotaAutenticadaProps> = ({
                           spin
                         />
                       </span>
-                        <span>Entrar Ultilizando Redes Sociais</span></Button></div>
+                        <span>Supremo Gas</span></Button></div>
                     </div>
 
                     <div className="col">

@@ -16,10 +16,11 @@ export default NextAuth({
         CredentialsProvider({
           name:"NextAuthCredentials",
           credentials:{
-            username: { label: "Username", type: "text", placeholder: "jsmith" },
-            password: { label: "Password", type: "password" }
+             username: { label: "Username", type: "text", placeholder: "jsmith" },
+             password: { label: "Password", type: "password" }
           },
           async authorize(credentials, req) {
+            
             var user = null
             if (credentials?.username =="administrador" && credentials?.password =="admin"){
               user = { id: "1", name: "administrador", email: "administrador@gmail.com" }
