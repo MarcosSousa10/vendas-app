@@ -14,13 +14,13 @@ export default NextAuth({
         //   clientSecret: process.env.GITHUB_SECRET ?? ""
         // }),
         CredentialsProvider({
-          name:"NextAuthCredentials",
+          name:"Login",
           credentials:{
-             username: { label: "Username", type: "text", placeholder: "jsmith" },
-             password: { label: "Password", type: "password" }
+             username: { label: "Usuario", type: "text", placeholder: "jsmith" },
+             password: { label: "Senha", type: "password" }
           },
           async authorize(credentials, req) {
-            
+
             var user = null
             if (credentials?.username =="administrador" && credentials?.password =="admin"){
               user = { id: "1", name: "administrador", email: "administrador@gmail.com" }
