@@ -20,13 +20,13 @@ export default NextAuth({
             password: { label: "Password", type: "password" }
           },
           async authorize(credentials, req) {
-              const res = await fetch("/api/login", {
-                method: 'GET',
-              body: JSON.stringify(credentials),
-                headers: { "Content-Type": "application/json" }
-              })
+            var user = null
+            if (credentials?.username =="administrador" && credentials?.password =="admin"){
+              user = { id: "1", name: "administrador", email: "administrador@gmail.com" }
+            }else{
+              user =null;
+            }
 
-            const user = { id: "1", name: "administrador", email: "administrador@gmail.com" }
             // const user = await res.json()
             if (user) {
               // Any object returned will be saved in `user` property of the JWT
