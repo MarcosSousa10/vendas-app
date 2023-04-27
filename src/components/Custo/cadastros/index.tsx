@@ -35,7 +35,7 @@ export const Cadastro: React.FC = () => {
 
         const Task = async (cod: any) => {
           await axios
-            .get(`http://192.168.2.181:8080/api/codigo/${cod}`)
+            .get(`https://supremogas.herokuapp.com/api/codigo/${cod}`)
             .then(Response => {
              
               setDataCadastro(Response.data.dataCadastro);
@@ -49,7 +49,7 @@ export const Cadastro: React.FC = () => {
 
         const Tasks = async (cod: any) => {
             await axios
-              .get(`http://192.168.2.181:8080/api/codigoCusto/${cod}`)
+              .get(`https://supremogas.herokuapp.com/api/codigoCusto/${cod}`)
               .then(Response => {
                
                 setDataCadastros(Response.data.dataCadastro);
