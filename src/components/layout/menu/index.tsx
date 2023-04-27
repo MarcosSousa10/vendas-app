@@ -18,7 +18,7 @@ export const Menu: React.FC = () => {
             <Nav.Link ><MenuItem href="/consultas/clientes" label="Clientes" /></Nav.Link>
             <Nav.Link > <MenuItem href="/vendas/nova-venda" label="Venda" /></Nav.Link>
             <Nav.Link><MenuItem href="/vendas/relatorio-vendas" label="Relatorio" /></Nav.Link>
-            <Nav.Link ><MenuItem href="/cadastros/preco" label="Preço" /></Nav.Link>
+            <Nav.Link ><MenuItem href="/cadastros/preco" label="Margem de Lucro" /></Nav.Link>
 
           </Nav>
           <Nav>
