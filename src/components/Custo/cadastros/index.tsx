@@ -1,29 +1,7 @@
 import Layout from "../../layout";
 import { Input } from "../../common/input";
 import { useState } from "react";
-import { useEffect } from "react";
-import { Produto } from "../../../app/models/produtos";
-import { formatReal } from "../../../app/util/money";
-import { useRouter } from "next/router";
-import { converterEmBigDecimal } from "../../../app/util/money";
-import { Alert } from "../../common/message";
-import * as yup from 'yup';
-import Link from "next/link";
-import { InputMoney } from "../../common/input";
-import { Custo } from "../../../app/models/CadastroCusto";
-import { useCustoService } from "../../../app/services/custo.service";
 import axios from "axios";
-import { useLucroService } from "../../../app/services/lucro.service";
-import { Button } from "react-bootstrap";
-import { InputText } from "primereact/inputtext";
-import { error } from "console";
-const validationSchema = yup.object().shape({
-    Mes: yup.string().trim().required("Campo Obrigatorio"),
-})
-interface FormErros {
-    Mes?: string;
-}
-
 export const Cadastro: React.FC = () => {
 
         
