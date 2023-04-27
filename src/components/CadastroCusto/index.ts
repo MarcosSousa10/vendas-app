@@ -1,0 +1,1 @@
+export { CadastroCusto } from './cadastros'
