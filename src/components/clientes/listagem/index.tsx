@@ -1,6 +1,6 @@
 import { Cliente } from '../../../app/models/clientes'
 import Layout from '../../layout'
-import { Input, InputCPF } from '../../common/input'
+import { Input, InputCPF, InputTelefone } from '../../common/input'
 import { useFormik } from 'formik'
 import { useState } from 'react'
 import { DataTable, DataTablePageParams } from 'primereact/datatable'
@@ -13,7 +13,7 @@ import Router from 'next/router'
 
 interface ConsultaClientesForm {
     nome?: string;
-    cpf?: string;
+    telefone?: string;
 }
 
 export const ListagemClientes: React.FC = () => {
@@ -38,12 +38,12 @@ export const ListagemClientes: React.FC = () => {
         handleChange
     } = useFormik<ConsultaClientesForm>({
         onSubmit: handleSubmit,
-        initialValues: { nome: '', cpf: '' }
+        initialValues: { nome: '', telefone: '' }
     })
 
     const handlePage = (event: DataTablePageParams) => {
         setLoading(true)
-        service.find(filtro.nome, filtro.cpf, event?.page, event?.rows)
+        service.find(filtro.nome, filtro.telefone, event?.page, event?.rows)
             .then(result => {
                 setClientes({ ...result, first: event?.first })
             }).finally(() => setLoading(false))
@@ -91,10 +91,10 @@ export const ListagemClientes: React.FC = () => {
                             value={filtro.nome} />
                     </div>
                     <div className='col '>
-                        <InputCPF label="CPF" id="cpf" className='form-control'
+                        <Input label="Telefone" id="telefone" className='form-control'
                             columnClasses="is-half"
                             onChange={handleChange}
-                            name="cpf" value={filtro.cpf} />
+                            name="telefone" value={filtro.telefone} />
 
 
                     </div>
@@ -133,7 +133,7 @@ export const ListagemClientes: React.FC = () => {
                     >
                         <Column field="id" header="Código" />
                         <Column field="nome" header="Nome" />
-                        <Column field="cpf" header="CPF" />
+                        <Column field="telefone" header="Telefone" />
                         <Column field="email" header="Email" />
                         <Column body={actionTemplate} />
                     </DataTable>
